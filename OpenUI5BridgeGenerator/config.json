@@ -1,0 +1,13 @@
+﻿{
+  "ActionSheet": {
+    "defaultSlot": "buttons"
+  },
+  "Control": {
+  },
+  "Input": {
+    "events": {
+      "Change": "value",
+      "LiveChange": "value"
+    }
+  }
+}
