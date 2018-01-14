@@ -1,13 +1,120 @@
 ﻿{
-  "ActionSheet": {
-    "defaultSlot": "buttons"
+  "sap.ui.core": {
+    "Object": {
+    },
+    "EventProvider": {
+    },
+    "ManagedObject": {
+    },
+    "Element": {
+    },
+    "Control": {
+    },
+    "HTML": {
+      "overrideName": "Html"
+    },
+    "ListItem": {},
+    "LayoutData": {},
+    "Title": {},
+    "Item": {}
   },
-  "Control": {
+  "sap.ui.layout": {
+    
+    "FormLayout": {},
+    "Grid": {},
+    "GridData": {},
+    "VerticalLayout": {},
+    "Form": {},
+    "FormContainer": {},
+    "FormElement": {},
+    "ResponsiveGridLayout": {},
+    "SimpleForm": {}
   },
-  "Input": {
-    "events": {
-      "Change": "value",
-      "LiveChange": "value"
-    }
+  "sap.f": {
+    "DynamicPage": {},
+    "DynamicPageHeader": {},
+    "DynamicPageTitle": {}
+  },
+  "sap.m": {
+    "InputBase": {},
+    "ListItemBase": {},
+    "ActionSheet": {},
+    "Bar": {},
+    "Breadcrumbs": {},
+    "Button": {},
+    "Column": {},
+    "ColumnListItem": {},
+    "DateTimeField": {},
+    "DatePicker": {},
+    "Dialog": {},
+    "FeedContent": {},
+    "UploadCollection": {
+    },
+    "FormattedText": {},
+    "GenericTile": {},
+
+
+    "Icon": {},
+    "IconTabBar": {},
+    "IconTabFilter": {},
+    "ImageContent": {},
+    "Input": {
+      "events": {
+        "Change": "value",
+        "LiveChange": "value"
+      }
+    },
+    "Label": {},
+    "Link": {},
+    "ListBase": {},
+    "List": {},
+
+    "Tile": {},
+    "Title": {
+      "overrideName": "mTitle"
+    },
+    "MessageItem": {},
+    "MessageStrip": {},
+    "MessageView": {},
+    "NumericContent": {},
+    "ObjectIdentifier": {},
+    "ObjectNumber": {},
+    "OverflowToolbar": {},
+    "Page": {},
+
+    "ResponsivePopover": {},
+    "SearchField": {},
+    "SegmentedButton": {},
+    "SegmentedButtonItem": {},
+    "Select": {},
+    "SelectDialog": {},
+    "Shell": {
+      "overrideTag":"content" 
+    },
+
+    "SlideTile": {},
+    "SplitContainer": {},
+    "StandardListItem": {},
+    "StandardTile": {},
+    "Switch": {},
+    "TabContainer": {},
+    "TabContainerItem": {},
+    "Table": {},
+    "TableSelectDialog": {},
+    "Text": {},
+    "TileContainer": {},
+    "TileContent": {},
+    "Toolbar": {},
+    "ToolbarSpacer": {},
+    "UploadCollectionItem": {},
+    "UploadCollectionParameter": {},
+
+    "ViewSettingsDialog": {},
+    "ViewSettingsItem": {},
+    "ViewSettingsFilterItem": {},
+    "Wizard": {},
+    "WizardStep": {}
+
+
   }
 }

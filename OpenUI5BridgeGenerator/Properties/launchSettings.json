@@ -2,7 +2,7 @@
   "profiles": {
     "OpenUI5BridgeGenerator": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\joscha.metze\\Downloads\\openui5-sdk-1.44.8\\test-resources\\sap\\m\\designtime\\api.json\""
+      "commandLineArgs": "\"C:\\Users\\Joscha\\Downloads\\openui5-sdk-1.50.8\\test-resources\""
     }
   }
 }

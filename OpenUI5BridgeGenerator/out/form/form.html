@@ -1,0 +1,16 @@
+<template>
+  <div ref="Form">
+    <formContainers ref="formContainers">
+      <slot></slot>
+    </formContainers>
+    <title ref="title">
+      <slot name="title"></slot>
+    </title>
+    <toolbar ref="toolbar">
+      <slot name="toolbar"></slot>
+    </toolbar>
+    <layout ref="layout">
+      <slot name="layout"></slot>
+    </layout>
+  </div>
+</template>
