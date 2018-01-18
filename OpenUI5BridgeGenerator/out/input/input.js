@@ -13,7 +13,6 @@ export class Ui5Input extends Ui5InputBase{
          @bindable ui5Id = null;
         @bindable() type = 'Text';
 @bindable() maxLength = 0;
-@bindable() dateFormat = 'YYYY-MM-dd';
 @bindable() showValueHelp = false;
 @bindable() showSuggestion = false;
 @bindable() valueHelpOnly = false;
@@ -54,6 +53,15 @@ export class Ui5Input extends Ui5InputBase{
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
+/* inherited from sap.ui.core.Element*/
+/* inherited from sap.ui.base.ManagedObject*/
+@bindable() validationSuccess = this.defaultFunc;
+@bindable() validationError = this.defaultFunc;
+@bindable() parseError = this.defaultFunc;
+@bindable() formatError = this.defaultFunc;
+@bindable() modelContextChange = this.defaultFunc;
+/* inherited from sap.ui.base.EventProvider*/
+/* inherited from sap.ui.base.Object*/
 
                 constructor(element) {
                     super(element);                    
@@ -67,7 +75,6 @@ export class Ui5Input extends Ui5InputBase{
         fillProperties(params){
                params.type = this.type;
 params.maxLength = this.maxLength?parseInt(this.maxLength):0;
-params.dateFormat = this.dateFormat;
 params.showValueHelp = getBooleanFromAttributeValue(this.showValueHelp);
 params.showSuggestion = getBooleanFromAttributeValue(this.showSuggestion);
 params.valueHelpOnly = getBooleanFromAttributeValue(this.valueHelpOnly);
@@ -83,6 +90,11 @@ params.textFormatMode = this.textFormatMode;
 params.textFormatter = this.textFormatter;
 params.suggestionRowValidator = this.suggestionRowValidator;
 params.enableSuggestionsHighlighting = getBooleanFromAttributeValue(this.enableSuggestionsHighlighting);
+params.liveChange = this.liveChange==null ? this.defaultFunc: this.liveChange;
+params.valueHelpRequest = this.valueHelpRequest==null ? this.defaultFunc: this.valueHelpRequest;
+params.suggest = this.suggest==null ? this.defaultFunc: this.suggest;
+params.suggestionItemSelected = this.suggestionItemSelected==null ? this.defaultFunc: this.suggestionItemSelected;
+params.submit = this.submit==null ? this.defaultFunc: this.submit;
             
         }
         defaultFunc() {
@@ -96,11 +108,12 @@ params.enableSuggestionsHighlighting = getBooleanFromAttributeValue(this.enableS
           this._input = new sap.m.Input(this.ui5Id, params);
         else
           this._input = new sap.m.Input(params);
+        
         if ($(this.element).closest("[ui5-container]").length > 0) {
                                             this._parent = $(this.element).closest("[ui5-container]")[0].au.controller.viewModel;
                                         if (!this._parent.UIElement || (this._parent.UIElement.sId != this._input.sId)) {
         var prevSibling = null;
-        if (this.element.previousElementSibling)
+        if (this.element.previousElementSibling && this.element.previousElementSibling.au)
           prevSibling = this.element.previousElementSibling.au.controller.viewModel.UIElement;
         this._relation = this._parent.addChild(this._input, this.element, prevSibling);
         this.attributeManager.addAttributes({"ui5-container": '' });
@@ -108,7 +121,7 @@ params.enableSuggestionsHighlighting = getBooleanFromAttributeValue(this.enableS
       else {
                                                     this._parent = $(this.element.parentElement).closest("[ui5-container]")[0].au.controller.viewModel;
                                                 var prevSibling = null;
-        if (this.element.previousElementSibling) {
+        if (this.element.previousElementSibling && this.element.previousElementSibling.au) {
                                                     prevSibling = this.element.previousElementSibling.au.controller.viewModel.UIElement;
                                                 this._relation = this._parent.addChild(this._input, this.element, prevSibling);
         }
@@ -132,33 +145,51 @@ params.enableSuggestionsHighlighting = getBooleanFromAttributeValue(this.enableS
            
         }
     detached() {
+        try{
+          if ($(this.element).closest("[ui5-container]").length > 0) {
         if (this._parent && this._relation) {
                                                                 this._parent.removeChildByRelation(this._input, this._relation);
                                                             }
+                                                                                }
          else{
                                                                 this._input.destroy();
                                                             }
          super.detached();
+          }
+         catch(err){}
         }
 
     addChild(child, elem, afterElement) {
         var path = jQuery.makeArray($(elem).parentsUntil(this.element));
         for (elem of path) {
-                                                                if (elem.localName == 'suggestionItems') { var _index = null; if (afterElement) _index = this._input.indexOfSuggestionItem(afterElement); if (_index)this._input.insertSuggestionItem(child, _index + 1); else this._input.addSuggestionItem(child, 0);  return elem.localName; }
-if (elem.localName == 'suggestionColumns') { var _index = null; if (afterElement) _index = this._input.indexOfSuggestionColumn(afterElement); if (_index)this._input.insertSuggestionColumn(child, _index + 1); else this._input.addSuggestionColumn(child, 0);  return elem.localName; }
-if (elem.localName == 'suggestionRows') { var _index = null; if (afterElement) _index = this._input.indexOfSuggestionRow(afterElement); if (_index)this._input.insertSuggestionRow(child, _index + 1); else this._input.addSuggestionRow(child, 0);  return elem.localName; }
+        try{
+                 if (elem.localName == 'suggestionitems') { var _index = null; if (afterElement) _index = this._input.indexOfSuggestionItem(afterElement); if (_index)this._input.insertSuggestionItem(child, _index + 1); else this._input.addSuggestionItem(child, 0);  return elem.localName; }
+if (elem.localName == 'suggestioncolumns') { var _index = null; if (afterElement) _index = this._input.indexOfSuggestionColumn(afterElement); if (_index)this._input.insertSuggestionColumn(child, _index + 1); else this._input.addSuggestionColumn(child, 0);  return elem.localName; }
+if (elem.localName == 'suggestionrows') { var _index = null; if (afterElement) _index = this._input.indexOfSuggestionRow(afterElement); if (_index)this._input.insertSuggestionRow(child, _index + 1); else this._input.addSuggestionRow(child, 0);  return elem.localName; }
+if (elem.localName == 'tooltip') { this._input.setTooltip(child); return elem.localName;}
+if (elem.localName == 'customdata') { var _index = null; if (afterElement) _index = this._input.indexOfCustomData(afterElement); if (_index)this._input.insertCustomData(child, _index + 1); else this._input.addCustomData(child, 0);  return elem.localName; }
+if (elem.localName == 'layoutdata') { this._input.setLayoutData(child); return elem.localName;}
+if (elem.localName == 'dependents') { var _index = null; if (afterElement) _index = this._input.indexOfDependent(afterElement); if (_index)this._input.insertDependent(child, _index + 1); else this._input.addDependent(child, 0);  return elem.localName; }
 
+           }
+           catch(err){}
                                                                     }
       }
       removeChildByRelation(child, relation) {
-                                                                        if (relation == 'suggestionItems') {  this._input.removeSuggestionItem(child); }
+      try{
+               if (relation == 'suggestionItems') {  this._input.removeSuggestionItem(child); }
 if (relation == 'suggestionColumns') {  this._input.removeSuggestionColumn(child); }
 if (relation == 'suggestionRows') {  this._input.removeSuggestionRow(child); }
+if (relation == 'tooltip') {  this._input.destroyTooltip(child); }
+if (relation == 'customData') {  this._input.removeCustomData(child); }
+if (relation == 'layoutData') {  this._input.destroyLayoutData(child); }
+if (relation == 'dependents') {  this._input.removeDependent(child); }
 
+      }
+      catch(err){}
                                                                             }
     typeChanged(newValue){if(this._input!==null){ this._input.setType(newValue);}}
 maxLengthChanged(newValue){if(this._input!==null){ this._input.setMaxLength(newValue);}}
-dateFormatChanged(newValue){if(this._input!==null){ this._input.setDateFormat(newValue);}}
 showValueHelpChanged(newValue){if(this._input!==null){ this._input.setShowValueHelp(getBooleanFromAttributeValue(newValue));}}
 showSuggestionChanged(newValue){if(this._input!==null){ this._input.setShowSuggestion(getBooleanFromAttributeValue(newValue));}}
 valueHelpOnlyChanged(newValue){if(this._input!==null){ this._input.setValueHelpOnly(getBooleanFromAttributeValue(newValue));}}
@@ -199,6 +230,15 @@ visibleChanged(newValue){if(this._input!==null){ this._input.setVisible(getBoole
 fieldGroupIdsChanged(newValue){if(this._input!==null){ this._input.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/
 validateFieldGroupChanged(newValue){if(this._input!==null){ this._input.attachValidateFieldGroup(newValue);}}
+/* inherited from sap.ui.core.Element*/
+/* inherited from sap.ui.base.ManagedObject*/
+validationSuccessChanged(newValue){if(this._input!==null){ this._input.attachValidationSuccess(newValue);}}
+validationErrorChanged(newValue){if(this._input!==null){ this._input.attachValidationError(newValue);}}
+parseErrorChanged(newValue){if(this._input!==null){ this._input.attachParseError(newValue);}}
+formatErrorChanged(newValue){if(this._input!==null){ this._input.attachFormatError(newValue);}}
+modelContextChangeChanged(newValue){if(this._input!==null){ this._input.attachModelContextChange(newValue);}}
+/* inherited from sap.ui.base.EventProvider*/
+/* inherited from sap.ui.base.Object*/
 
 
                                                                                 }

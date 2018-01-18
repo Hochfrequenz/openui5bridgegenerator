@@ -11,12 +11,76 @@ namespace OpenUI5BridgeGenerator
 {
     class Compiler
     {
+        protected void AddAdditionalProperty(String property, JToken value, StringBuilder propertyBuilder)
+        {
+            if (value.Type == JTokenType.Boolean)
+                propertyBuilder.AppendLine("@bindable() " + property + " = " + (value.Value<bool>() ? "true" : "false") + ";");
+            else if (value.Type == JTokenType.String)
+            {
+                propertyBuilder.AppendLine("@bindable() " + property + " = \"" + value.Value<string>() + "\";");
+            }
+
+        }
+        protected void AddAggregation(String objectName, JProperty prop, JToken uiObject, string defaultRoot, XElement root, JArray aggregations, StringBuilder addChildBuilder, StringBuilder removeChildBuilder)
+        {
+            foreach (var agg in aggregations)
+            {
+                if (agg["visibility"].Value<string>() == "public")
+                {
+                    var aggName = agg["name"].Value<string>();
+                    if (prop.Value["overrideTags"] != null && prop.Value["overrideTags"].Value<JObject>()[aggName] != null)
+                        aggName = prop.Value["overrideTags"].Value<JObject>()[aggName].Value<string>();
+                    XElement newAggregationElement = new XElement(aggName);
+                    newAggregationElement.SetAttributeValue("ref", aggName);
+                    XElement slotElement = new XElement("slot");
+                    slotElement.Value = string.Empty;
+                    if (prop.Value["defaultAggregation"] != null)
+                        defaultRoot = prop.Value["defaultAggregation"].Value<string>();
+                    if (defaultRoot == null || defaultRoot != agg["name"].Value<string>())
+                    {
+                        slotElement.SetAttributeValue("name", aggName);
+                    }
+                    newAggregationElement.Add(slotElement);
+                    root.Add(newAggregationElement);
+                    string lowerAggName = aggName.ToLower();
+                    if (prop.Value["addDefaultSlot"] != null && prop.Value["addDefaultSlot"].Value<bool>() == true)
+                    {
+                        XElement emptySlot = new XElement("slot");
+                        emptySlot.Value = string.Empty;
+                        root.Add(emptySlot);
+                    }
+                    if (agg["cardinality"].Value<string>() == "0..1")
+                    {
+                        addChildBuilder.AppendLine("if (elem.localName == '" + lowerAggName + "') { this." + "_" + objectName.ToLower() + "." + agg["methods"].Value<JArray>()[2].Value<string>() + "(child); return elem.localName;}");
+                        removeChildBuilder.AppendLine("if (relation == '" +
+                            aggName + "') {  this." +
+                            "_" + objectName.ToLower() +
+                            "." + agg["methods"].Value<JArray>()[1].Value<string>() + "(child); }");
+                    }
+                    else if (agg["cardinality"].Value<string>() == "0..n")
+                    {
+                        addChildBuilder.AppendLine("if (elem.localName == '" + lowerAggName + "') { var _index = null; if (afterElement) _index = this." +
+                            "_" + objectName.ToLower() +
+                            "." + agg["methods"].Value<JArray>()[5].Value<string>() + "(afterElement); if (_index)this." + "_" + objectName.ToLower() +
+                            "." + agg["methods"].Value<JArray>()[2].Value<string>() + "(child, _index + 1); else this." +
+                            "_" + objectName.ToLower() +
+                            "." + agg["methods"].Value<JArray>()[3].Value<string>() + "(child, 0);  return elem.localName; }");
+
+                        removeChildBuilder.AppendLine("if (relation == '" +
+                            aggName + "') {  this." +
+                            "_" + objectName.ToLower() +
+                            "." + agg["methods"].Value<JArray>()[4].Value<string>() + "(child); }");
+                    }
+
+                }
+            }
+        }
         protected void AddParentPropertiesAndEvents(string objectName, string parentName, JArray parentProperties, JArray parentEvents, StringBuilder propertyBuilder, StringBuilder changeHandlerBuilder)
         {
             propertyBuilder.AppendLine("/* inherited from " + parentName + "*/");
             foreach (var property in parentProperties)
             {
-                if (property["visibility"].Value<string>() == "public")
+                if (property["visibility"].Value<string>() == "public" && property["deprecated"] == null)
                 {
                     var isBoolean = property["type"].Value<string>() == "boolean";
                     var isNullDefault = property["defaultValue"].Value<string>() == null;
@@ -65,9 +129,10 @@ namespace OpenUI5BridgeGenerator
             changeHandlerBuilder.AppendLine("/* inherited from " + parentName + "*/");
             foreach (var ev in parentEvents)
             {
-                if (ev["visibility"].Value<string>() == "public")
+                if (ev["visibility"].Value<string>() == "public" && ev["deprecated"] == null)
                 {
                     propertyBuilder.AppendLine("@bindable() " + ev["name"].Value<string>() + " = this.defaultFunc;");
+
                     changeHandlerBuilder.AppendLine(ev["name"].Value<string>() +
                     "Changed(newValue){if(this." + "_" +
                     objectName.ToLower() +
@@ -88,7 +153,9 @@ namespace OpenUI5BridgeGenerator
             var configObject = (JObject)Newtonsoft.Json.Linq.JObject.ReadFrom(new JsonTextReader(System.IO.File.OpenText("./config.json")));
             Dictionary<string, JArray> parentProperties = new Dictionary<string, JArray>();
             Dictionary<string, JArray> parentEvents = new Dictionary<string, JArray>();
+            Dictionary<string, JArray> parentAggregations = new Dictionary<string, JArray>();
             Dictionary<string, string> parentRelations = new Dictionary<string, string>();
+            Dictionary<string, string> parentDefaultAggregation = new Dictionary<string, string>();
             foreach (var name in configObject.Properties())
             {
 
@@ -117,57 +184,18 @@ namespace OpenUI5BridgeGenerator
                         System.IO.File.Copy("./templates/Basic.js", System.IO.Path.Combine(outputPath, kebabObjectName, kebabObjectName + ".js"), true);
                         //replace HTML template
                         XElement templateRoot = XElement.Parse(System.IO.File.ReadAllText("./templates/Basic.html"));
-                        XElement newRoot = new XElement("div");
-                        newRoot.SetAttributeValue("ref", objectName);
-                        templateRoot.Add(newRoot);
+                        XElement newRoot = templateRoot;
+
                         var contentRoot = templateRoot.Element("CONTENT");
                         var aggregations = (uiObject["ui5-metadata"] as JObject)?.Property("aggregations");
                         StringBuilder addChildBuilder = new StringBuilder();
                         StringBuilder removeChildBuilder = new StringBuilder();
                         if (aggregations != null)
                         {
-                            foreach (var agg in (aggregations.Value as JArray))
-                            {
-                                if (agg["visibility"].Value<string>() == "public")
-                                {
-                                    var aggName = agg["name"].Value<string>();
-                                    if (prop.Value["overrideTag"] != null)
-                                        aggName = prop.Value["overrideTag"].Value<string>();
-                                    XElement newAggregationElement = new XElement(aggName);
-                                    newAggregationElement.SetAttributeValue("ref", aggName);
-                                    XElement slotElement = new XElement("slot");
-                                    slotElement.Value = string.Empty;
-                                    if ((uiObject["ui5-metadata"] as JObject)?.Property("defaultAggregation") == null || (uiObject["ui5-metadata"] as JObject)?.Property("defaultAggregation").Value.Value<string>() != aggName)
-                                    {
-                                        slotElement.SetAttributeValue("name", aggName);
-                                    }
-                                    newAggregationElement.Add(slotElement);
-                                    newRoot.Add(newAggregationElement);
-                                    if (agg["cardinality"].Value<string>() == "0..1")
-                                    {
-                                        addChildBuilder.AppendLine("if (elem.localName == '" + aggName + "') { this." + "_" + objectName.ToLower() + "." + agg["methods"].Value<JArray>()[2].Value<string>() + "(child); return elem.localName;}");
-                                    }
-                                    else if (agg["cardinality"].Value<string>() == "0..n")
-                                    {
-                                        addChildBuilder.AppendLine("if (elem.localName == '" + aggName + "') { var _index = null; if (afterElement) _index = this." +
-                                            "_" + objectName.ToLower() +
-                                            "." + agg["methods"].Value<JArray>()[5].Value<string>() + "(afterElement); if (_index)this." + "_" + objectName.ToLower() +
-                                            "." + agg["methods"].Value<JArray>()[2].Value<string>() + "(child, _index + 1); else this." +
-                                            "_" + objectName.ToLower() +
-                                            "." + agg["methods"].Value<JArray>()[3].Value<string>() + "(child, 0);  return elem.localName; }");
-
-                                        removeChildBuilder.AppendLine("if (relation == '" +
-                                            aggName + "') {  this." +
-                                            "_" + objectName.ToLower() +
-                                            "." + agg["methods"].Value<JArray>()[4].Value<string>() + "(child); }");
-                                    }
-
-                                }
-                            }
+                            parentAggregations.Add(uiObject["name"].Value<string>(), aggregations.Value as JArray);
+                            parentDefaultAggregation.Add(uiObject["name"].Value<string>(), (uiObject["ui5-metadata"] as JObject)?.Property("defaultAggregation")?.Value?.Value<string>());
+                            AddAggregation(objectName, prop, uiObject, (uiObject["ui5-metadata"] as JObject)?.Property("defaultAggregation")?.Value?.Value<string>(), newRoot, (aggregations.Value as JArray), addChildBuilder, removeChildBuilder);
                         }
-                        contentRoot.Remove();
-
-                        System.IO.File.WriteAllText(System.IO.Path.Combine(outputPath, kebabObjectName, kebabObjectName + ".html"), templateRoot.ToString());
 
                         //replace js file
                         string jsString = System.IO.File.ReadAllText("./templates/Basic.js");
@@ -205,7 +233,8 @@ namespace OpenUI5BridgeGenerator
                             parentProperties.Add(uiObject["name"].Value<string>(), properties.Value as JArray);
                             foreach (var property in (properties.Value as JArray))
                             {
-                                if (property["visibility"].Value<string>() == "public")
+                                //don't include deprecated properties
+                                if (property["visibility"].Value<string>() == "public" && property["deprecated"] == null)
                                 {
                                     var isBoolean = property["type"].Value<string>() == "boolean";
                                     var isNullDefault = property["defaultValue"].Value<string>() == null;
@@ -245,7 +274,10 @@ namespace OpenUI5BridgeGenerator
                                     {
                                         paramValue = paramValue + "?parseInt(" + paramValue + "):0";
                                     }
-                                    paramBuilder.AppendLine("params." + property["name"].Value<string>() + " = " + paramValue + ";");
+                                    if (prop.Value["paramOverrides"] != null && prop.Value["paramOverrides"].Value<JObject>()[property["name"].Value<string>()] != null)
+                                        paramBuilder.AppendLine("params." + property["name"].Value<string>() + " = " + prop.Value["paramOverrides"].Value<JObject>()[property["name"].Value<string>()].Value<string>());
+                                    else
+                                        paramBuilder.AppendLine("params." + property["name"].Value<string>() + " = " + paramValue + ";");
                                     changeHandlerBuilder.AppendLine(property["name"].Value<string>() +
                                         "Changed(newValue){if(this." + "_" +
                                         objectName.ToLower() +
@@ -257,62 +289,95 @@ namespace OpenUI5BridgeGenerator
                                         newValue);
                                 }
                             }
-
-                            var events = (uiObject["ui5-metadata"] as JObject)?.Property("events");
-                            if (events != null)
+                        }
+                        if (prop.Value["additionalProperties"] != null)
+                        {
+                            foreach (var objProperty in prop.Value["additionalProperties"].Value<JObject>().Properties())
                             {
-                                parentEvents.Add(uiObject["name"].Value<string>(), events.Value as JArray);
-                                foreach (var ev in (events.Value as JArray))
-                                {
-                                    if (ev["visibility"].Value<string>() == "public")
-                                    {
-                                        propertyBuilder.AppendLine("@bindable() " + ev["name"].Value<string>() + " = this.defaultFunc;");
-                                        changeHandlerBuilder.AppendLine(ev["name"].Value<string>() +
-                                        "Changed(newValue){if(this." + "_" +
-                                        objectName.ToLower() +
-                                        "!==null){ this." +
-                                        "_" +
-                                        objectName.ToLower() +
-                                        "." +
-                                        ev["methods"].Value<JArray>()[0].Value<string>() +
-                                        "(newValue);}}");
-                                    }
-                                }
-                                if (configObject["events"] != null)
-                                {
-                                    foreach (var evObj in configObject["events"].Value<JObject>().Properties())
-                                    {
-                                        specialEventBuilder.AppendLine("this." +
-                                            "_" + objectName.ToLower() +
-                                            ".attach" + evObj.Name + "((event) => { that." + evObj.Value<string>() + " = event.mParameters." + evObj.Value<string>() + "; });");
-                                    }
-                                }
-
-                            }
-                            if (uiObject["extends"] != null)
-                            {
-                                string parentName = uiObject["extends"].Value<string>();
-                                parentRelations.Add(uiObject["name"].Value<string>(), parentName);
-                                var curParent = parentName;
-                                while (parentRelations.ContainsKey(curParent))
-                                {
-                                    JArray parentPropertiesArray = new JArray();
-                                    JArray parentEventArray = new JArray();
-                                    if (parentProperties.ContainsKey(curParent))
-                                        parentPropertiesArray = parentProperties[curParent];
-                                    if (parentEvents.ContainsKey(curParent))
-                                        parentEventArray = parentEvents[curParent];
-                                    AddParentPropertiesAndEvents(objectName, curParent, parentPropertiesArray, parentEventArray, propertyBuilder, changeHandlerBuilder);
-                                    curParent = parentRelations[curParent];
-                                }
+                                AddAdditionalProperty(objProperty.Name, objProperty.Value, propertyBuilder);
                             }
                         }
+                        var events = (uiObject["ui5-metadata"] as JObject)?.Property("events");
+                        if (events != null)
+                        {
+                            parentEvents.Add(uiObject["name"].Value<string>(), events.Value as JArray);
+                            foreach (var ev in (events.Value as JArray))
+                            {
+                                if (ev["visibility"].Value<string>() == "public" && ev["deprecated"] == null)
+                                {
+                                    propertyBuilder.AppendLine("@bindable() " + ev["name"].Value<string>() + " = this.defaultFunc;");
+                                    var paramValue = "this." + ev["name"].Value<string>() +
+                                        "==null ? this.defaultFunc: this." + ev["name"].Value<string>();
+                                    paramBuilder.AppendLine("params." + ev["name"].Value<string>() + " = " + paramValue + ";");
+
+                                    changeHandlerBuilder.AppendLine(ev["name"].Value<string>() +
+                                    "Changed(newValue){if(this." + "_" +
+                                    objectName.ToLower() +
+                                    "!==null){ this." +
+                                    "_" +
+                                    objectName.ToLower() +
+                                    "." +
+                                    ev["methods"].Value<JArray>()[0].Value<string>() +
+                                    "(newValue);}}");
+                                }
+                            }
+                            if (configObject["events"] != null)
+                            {
+                                foreach (var evObj in configObject["events"].Value<JObject>().Properties())
+                                {
+                                    specialEventBuilder.AppendLine("this." +
+                                        "_" + objectName.ToLower() +
+                                        ".attach" + evObj.Name + "((event) => { " + evObj.Value<string>() + "; });");
+                                }
+                            }
+
+                        }
+                        if (uiObject["extends"] != null)
+                        {
+                            string parentName = uiObject["extends"].Value<string>();
+                            parentRelations.Add(uiObject["name"].Value<string>(), parentName);
+                            var curParent = parentName;
+                            while (curParent != null)
+                            {
+                                JArray parentPropertiesArray = new JArray();
+                                JArray parentEventArray = new JArray();
+                                JArray parentAggs = new JArray();
+                                string defaultAgg = null;
+                                if (parentProperties.ContainsKey(curParent))
+                                    parentPropertiesArray = parentProperties[curParent];
+                                if (parentEvents.ContainsKey(curParent))
+                                    parentEventArray = parentEvents[curParent];
+                                if (parentAggregations.ContainsKey(curParent))
+                                    parentAggs = parentAggregations[curParent];
+                                if (parentDefaultAggregation.ContainsKey(curParent))
+                                    defaultAgg = parentDefaultAggregation[curParent];
+                                AddParentPropertiesAndEvents(objectName, curParent, parentPropertiesArray, parentEventArray, propertyBuilder, changeHandlerBuilder);
+                                AddAggregation(objectName, prop, uiObject, defaultAgg, newRoot, parentAggs, addChildBuilder, removeChildBuilder);
+                                if (parentRelations.ContainsKey(curParent))
+                                    curParent = parentRelations[curParent];
+                                else
+                                    curParent = null;
+                            }
+                        }
+
+                        contentRoot.Remove();
+
+                        System.IO.File.WriteAllText(System.IO.Path.Combine(outputPath, kebabObjectName, kebabObjectName + ".html"), templateRoot.ToString());
+
                         jsString = jsString.Replace("<properties>", propertyBuilder.ToString());
                         jsString = jsString.Replace("<paramlist>", paramBuilder.ToString());
                         jsString = jsString.Replace("<changeHandler>", changeHandlerBuilder.ToString());
                         jsString = jsString.Replace("<addChilds>", addChildBuilder.ToString());
                         jsString = jsString.Replace("<removeChilds>", removeChildBuilder.ToString());
                         jsString = jsString.Replace("<specialevents>", specialEventBuilder.ToString());
+                        if (prop.Value.Value<JObject>()["attachOverride"] != null)
+                        {
+                            jsString = jsString.Replace("<attachOverride>", prop.Value.Value<JObject>()["attachOverride"].Value<string>());
+                        }
+                        else
+                        {
+                            jsString = jsString.Replace("<attachOverride>", "");
+                        }
                         System.IO.File.WriteAllText(System.IO.Path.Combine(outputPath, kebabObjectName, kebabObjectName + ".js"), jsString);
                     }
                     else

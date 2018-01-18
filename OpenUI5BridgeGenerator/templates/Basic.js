@@ -35,11 +35,12 @@ export class <classname> <extendsparentClass>{
           this.<classvar> = new <sapClass>(this.ui5Id, params);
         else
           this.<classvar> = new <sapClass>(params);
+        <attachOverride>
         if ($(this.element).closest("[ui5-container]").length > 0) {
                                             this._parent = $(this.element).closest("[ui5-container]")[0].au.controller.viewModel;
                                         if (!this._parent.UIElement || (this._parent.UIElement.sId != this.<classvar>.sId)) {
         var prevSibling = null;
-        if (this.element.previousElementSibling)
+        if (this.element.previousElementSibling && this.element.previousElementSibling.au)
           prevSibling = this.element.previousElementSibling.au.controller.viewModel.UIElement;
         this._relation = this._parent.addChild(this.<classvar>, this.element, prevSibling);
         this.attributeManager.addAttributes({"ui5-container": '' });
@@ -47,7 +48,7 @@ export class <classname> <extendsparentClass>{
       else {
                                                     this._parent = $(this.element.parentElement).closest("[ui5-container]")[0].au.controller.viewModel;
                                                 var prevSibling = null;
-        if (this.element.previousElementSibling) {
+        if (this.element.previousElementSibling && this.element.previousElementSibling.au) {
                                                     prevSibling = this.element.previousElementSibling.au.controller.viewModel.UIElement;
                                                 this._relation = this._parent.addChild(this.<classvar>, this.element, prevSibling);
         }
@@ -71,23 +72,34 @@ export class <classname> <extendsparentClass>{
            
         }
     detached() {
+        try{
+          if ($(this.element).closest("[ui5-container]").length > 0) {
         if (this._parent && this._relation) {
                                                                 this._parent.removeChildByRelation(this.<classvar>, this._relation);
                                                             }
+                                                                                }
          else{
                                                                 this.<classvar>.destroy();
                                                             }
          <superdetached>
+          }
+         catch(err){}
         }
 
     addChild(child, elem, afterElement) {
         var path = jQuery.makeArray($(elem).parentsUntil(this.element));
         for (elem of path) {
-                                                                <addChilds>
+        try{
+                 <addChilds>
+           }
+           catch(err){}
                                                                     }
       }
       removeChildByRelation(child, relation) {
-                                                                        <removeChilds>
+      try{
+               <removeChilds>
+      }
+      catch(err){}
                                                                             }
     <changeHandler>
 

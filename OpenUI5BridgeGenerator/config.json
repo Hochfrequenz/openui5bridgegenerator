@@ -10,16 +10,21 @@
     },
     "Control": {
     },
+    "CustomData": {
+
+    },
     "HTML": {
       "overrideName": "Html"
     },
+    "Item": {},
     "ListItem": {},
     "LayoutData": {},
     "Title": {},
-    "Item": {}
+    "Icon": {}
+
   },
   "sap.ui.layout": {
-    
+
     "FormLayout": {},
     "Grid": {},
     "GridData": {},
@@ -42,7 +47,9 @@
     "Bar": {},
     "Breadcrumbs": {},
     "Button": {},
-    "Column": {},
+    "Column": {
+      "defaultAggregation": "dependents"
+    },
     "ColumnListItem": {},
     "DateTimeField": {},
     "DatePicker": {},
@@ -54,20 +61,22 @@
     "GenericTile": {},
 
 
-    "Icon": {},
-    "IconTabBar": {},
+
+    "IconTabBar": { "defaultAggregation": "items" },
     "IconTabFilter": {},
     "ImageContent": {},
     "Input": {
       "events": {
-        "Change": "value",
-        "LiveChange": "value"
+        "Change": "that.value = event.mParameters.value;",
+        "LiveChange": "if (getBooleanFromAttributeValue(that.valueLiveUpdate)) {that.value = event.mParameters.value;}"
       }
     },
     "Label": {},
     "Link": {},
     "ListBase": {},
-    "List": {},
+    "List": {
+      "attachOverride": "if (this._list._oGrowingDelegate){this._list._oGrowingDelegate.updateItems = function(sChangeReason) { this._onBeforePageLoaded(sChangeReason);this._onAfterPageLoaded(sChangeReason); }; }"
+    },
 
     "Tile": {},
     "Title": {
@@ -79,17 +88,21 @@
     "NumericContent": {},
     "ObjectIdentifier": {},
     "ObjectNumber": {},
-    "OverflowToolbar": {},
+
     "Page": {},
 
-    "ResponsivePopover": {},
+    "ResponsivePopover": { "defaultAggregation": "content" },
     "SearchField": {},
-    "SegmentedButton": {},
+    "SegmentedButton": {
+      "events": {
+        "Select": "that.selectedKey = event.mParameters.key;"
+      }
+    },
     "SegmentedButtonItem": {},
     "Select": {},
     "SelectDialog": {},
     "Shell": {
-      "overrideTag":"content" 
+      "overrideTags": { "app": "content" }
     },
 
     "SlideTile": {},
@@ -99,12 +112,20 @@
     "Switch": {},
     "TabContainer": {},
     "TabContainerItem": {},
-    "Table": {},
+    "Table": {
+      "attachOverride": "if (this._table._oGrowingDelegate){this._table._oGrowingDelegate.updateItems = function(sChangeReason) { this._onBeforePageLoaded(sChangeReason);this._onAfterPageLoaded(sChangeReason); }; }"
+    },
     "TableSelectDialog": {},
-    "Text": {},
+    "Text": {
+      "defaultAggregation": "customData",
+      "paramOverrides": {
+        "text": "(this.text != null && this.text.length>0) ? this.text : this.element.getElementsByTagName(\"customData\")[0].innerText.trim();"
+      }
+    },
     "TileContainer": {},
     "TileContent": {},
     "Toolbar": {},
+    "OverflowToolbar": {},
     "ToolbarSpacer": {},
     "UploadCollectionItem": {},
     "UploadCollectionParameter": {},
@@ -112,7 +133,14 @@
     "ViewSettingsDialog": {},
     "ViewSettingsItem": {},
     "ViewSettingsFilterItem": {},
-    "Wizard": {},
+    "Wizard": {
+      "additionalProperties": {
+        "lastStep": false
+      },
+      "events": {
+        "StepActivate": "that.lastStep = event.mParameters.index == that._wizard.getSteps().length;"
+      }
+    },
     "WizardStep": {}
 
 
