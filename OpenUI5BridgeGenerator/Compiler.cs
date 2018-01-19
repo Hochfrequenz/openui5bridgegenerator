@@ -59,17 +59,25 @@ namespace OpenUI5BridgeGenerator
                     }
                     else if (agg["cardinality"].Value<string>() == "0..n")
                     {
+                        string overrides = null;
+                        if (prop.Value["addChild"] != null && prop.Value["addChild"].Value<JObject>()[aggName] != null)
+                            overrides = prop.Value["addChild"].Value<JObject>()[aggName].Value<string>();
+                        int insertFunction = 2;
+                        if (prop.Value["useAddInsteadOfInsert"] != null && prop.Value["useAddInsteadOfInsert"].Value<bool>())
+                            insertFunction = 3;
                         addChildBuilder.AppendLine("if (elem.localName == '" + lowerAggName + "') { var _index = null; if (afterElement) _index = this." +
                             "_" + objectName.ToLower() +
                             "." + agg["methods"].Value<JArray>()[5].Value<string>() + "(afterElement); if (_index)this." + "_" + objectName.ToLower() +
-                            "." + agg["methods"].Value<JArray>()[2].Value<string>() + "(child, _index + 1); else this." +
+                            "." + agg["methods"].Value<JArray>()[insertFunction].Value<string>() + "(child, _index + 1); else this." +
                             "_" + objectName.ToLower() +
-                            "." + agg["methods"].Value<JArray>()[3].Value<string>() + "(child, 0);  return elem.localName; }");
-
+                            "." + agg["methods"].Value<JArray>()[3].Value<string>() + "(child, 0); " + (overrides != null ? overrides : "") + " return elem.localName; }");
+                        overrides = null;
+                        if (prop.Value["removeChild"] != null && prop.Value["removeChild"].Value<JObject>()[aggName] != null)
+                            overrides = prop.Value["removeChild"].Value<JObject>()[aggName].Value<string>();
                         removeChildBuilder.AppendLine("if (relation == '" +
-                            aggName + "') {  this." +
+                            lowerAggName + "') {  this." +
                             "_" + objectName.ToLower() +
-                            "." + agg["methods"].Value<JArray>()[4].Value<string>() + "(child); }");
+                            "." + agg["methods"].Value<JArray>()[4].Value<string>() + "(child);" + (overrides != null ? overrides : "") + "}");
                     }
 
                 }
@@ -321,13 +329,13 @@ namespace OpenUI5BridgeGenerator
                                     "(newValue);}}");
                                 }
                             }
-                            if (configObject["events"] != null)
+                            if (prop.Value["events"] != null)
                             {
-                                foreach (var evObj in configObject["events"].Value<JObject>().Properties())
+                                foreach (var evObj in prop.Value["events"].Value<JObject>().Properties())
                                 {
                                     specialEventBuilder.AppendLine("this." +
                                         "_" + objectName.ToLower() +
-                                        ".attach" + evObj.Name + "((event) => { " + evObj.Value<string>() + "; });");
+                                        ".attach" + evObj.Name + "((event) => { " + evObj.Value.Value<string>() + "; });");
                                 }
                             }
 

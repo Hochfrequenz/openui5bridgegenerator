@@ -140,12 +140,12 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'items') {  this._tableselectdialog.removeItem(child); }
-if (relation == 'columns') {  this._tableselectdialog.removeColumn(child); }
+               if (relation == 'items') {  this._tableselectdialog.removeItem(child);}
+if (relation == 'columns') {  this._tableselectdialog.removeColumn(child);}
 if (relation == 'tooltip') {  this._tableselectdialog.destroyTooltip(child); }
-if (relation == 'customData') {  this._tableselectdialog.removeCustomData(child); }
+if (relation == 'customdata') {  this._tableselectdialog.removeCustomData(child);}
 if (relation == 'layoutData') {  this._tableselectdialog.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._tableselectdialog.removeDependent(child); }
+if (relation == 'dependents') {  this._tableselectdialog.removeDependent(child);}
 
       }
       catch(err){}

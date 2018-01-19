@@ -136,7 +136,9 @@ params.submit = this.submit==null ? this.defaultFunc: this.submit;
                                                         this.attributeManager.addAttributes({"ui5-container": '' });
                                                         this.attributeManager.addClasses("ui5-hide");
     }
-        
+        this._input.attachChange((event) => { that.value = event.mParameters.value;; });
+this._input.attachLiveChange((event) => { if (getBooleanFromAttributeValue(that.valueLiveUpdate)) {that.value = event.mParameters.value;}; });
+
                                                         //<!container>
            
                                                         //</!container>
@@ -177,13 +179,13 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'suggestionItems') {  this._input.removeSuggestionItem(child); }
-if (relation == 'suggestionColumns') {  this._input.removeSuggestionColumn(child); }
-if (relation == 'suggestionRows') {  this._input.removeSuggestionRow(child); }
+               if (relation == 'suggestionitems') {  this._input.removeSuggestionItem(child);}
+if (relation == 'suggestioncolumns') {  this._input.removeSuggestionColumn(child);}
+if (relation == 'suggestionrows') {  this._input.removeSuggestionRow(child);}
 if (relation == 'tooltip') {  this._input.destroyTooltip(child); }
-if (relation == 'customData') {  this._input.removeCustomData(child); }
+if (relation == 'customdata') {  this._input.removeCustomData(child);}
 if (relation == 'layoutData') {  this._input.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._input.removeDependent(child); }
+if (relation == 'dependents') {  this._input.removeDependent(child);}
 
       }
       catch(err){}

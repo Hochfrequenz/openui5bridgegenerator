@@ -104,7 +104,8 @@ params.expand = this.expand==null ? this.defaultFunc: this.expand;
                                                         this.attributeManager.addAttributes({"ui5-container": '' });
                                                         this.attributeManager.addClasses("ui5-hide");
     }
-        
+        this._icontabbar.attachSelect((event) => { that.selectedKey = event.mParameters.key;; });
+
                                                         //<!container>
            
                                                         //</!container>
@@ -144,12 +145,12 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'items') {  this._icontabbar.removeItem(child); }
-if (relation == 'content') {  this._icontabbar.removeContent(child); }
+               if (relation == 'items') {  this._icontabbar.removeItem(child);}
+if (relation == 'content') {  this._icontabbar.removeContent(child);}
 if (relation == 'tooltip') {  this._icontabbar.destroyTooltip(child); }
-if (relation == 'customData') {  this._icontabbar.removeCustomData(child); }
+if (relation == 'customdata') {  this._icontabbar.removeCustomData(child);}
 if (relation == 'layoutData') {  this._icontabbar.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._icontabbar.removeDependent(child); }
+if (relation == 'dependents') {  this._icontabbar.removeDependent(child);}
 
       }
       catch(err){}

@@ -110,7 +110,8 @@ params.change = this.change==null ? this.defaultFunc: this.change;
                                                         this.attributeManager.addAttributes({"ui5-container": '' });
                                                         this.attributeManager.addClasses("ui5-hide");
     }
-        
+        this._select.attachChange((event) => { that.selectedItem = event.mParameters.selectedItem;   if (event.mParameters.selectedItem)  that.selectedKey = event.mParameters.selectedItem.mProperties.key;  else    that.selectedKey = null;; });
+
                                                         //<!container>
            
                                                         //</!container>
@@ -137,7 +138,7 @@ params.change = this.change==null ? this.defaultFunc: this.change;
         var path = jQuery.makeArray($(elem).parentsUntil(this.element));
         for (elem of path) {
         try{
-                 if (elem.localName == 'items') { var _index = null; if (afterElement) _index = this._select.indexOfItem(afterElement); if (_index)this._select.insertItem(child, _index + 1); else this._select.addItem(child, 0);  return elem.localName; }
+                 if (elem.localName == 'items') { var _index = null; if (afterElement) _index = this._select.indexOfItem(afterElement); if (_index)this._select.insertItem(child, _index + 1); else this._select.addItem(child, 0);  var oldVal = this.selectedKey; this.selectedKey = null; this.selectedKey = oldVal; return elem.localName; }
 if (elem.localName == 'tooltip') { this._select.setTooltip(child); return elem.localName;}
 if (elem.localName == 'customdata') { var _index = null; if (afterElement) _index = this._select.indexOfCustomData(afterElement); if (_index)this._select.insertCustomData(child, _index + 1); else this._select.addCustomData(child, 0);  return elem.localName; }
 if (elem.localName == 'layoutdata') { this._select.setLayoutData(child); return elem.localName;}
@@ -149,11 +150,11 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'items') {  this._select.removeItem(child); }
+               if (relation == 'items') {  this._select.removeItem(child);  var oldVal = this.selectedKey; this.selectedKey = null; this.selectedKey = oldVal;}
 if (relation == 'tooltip') {  this._select.destroyTooltip(child); }
-if (relation == 'customData') {  this._select.removeCustomData(child); }
+if (relation == 'customdata') {  this._select.removeCustomData(child);}
 if (relation == 'layoutData') {  this._select.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._select.removeDependent(child); }
+if (relation == 'dependents') {  this._select.removeDependent(child);}
 
       }
       catch(err){}

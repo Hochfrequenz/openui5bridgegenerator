@@ -139,11 +139,11 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'items') {  this._selectdialog.removeItem(child); }
+               if (relation == 'items') {  this._selectdialog.removeItem(child);}
 if (relation == 'tooltip') {  this._selectdialog.destroyTooltip(child); }
-if (relation == 'customData') {  this._selectdialog.removeCustomData(child); }
+if (relation == 'customdata') {  this._selectdialog.removeCustomData(child);}
 if (relation == 'layoutData') {  this._selectdialog.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._selectdialog.removeDependent(child); }
+if (relation == 'dependents') {  this._selectdialog.removeDependent(child);}
 
       }
       catch(err){}

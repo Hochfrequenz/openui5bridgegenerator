@@ -150,15 +150,15 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'columns') {  this._list.removeColumn(child); }
-if (relation == 'items') {  this._list.removeItem(child); }
+               if (relation == 'columns') {  this._list.removeColumn(child);}
+if (relation == 'items') {  this._list.removeItem(child);}
 if (relation == 'swipeContent') {  this._list.destroySwipeContent(child); }
 if (relation == 'headerToolbar') {  this._list.destroyHeaderToolbar(child); }
 if (relation == 'infoToolbar') {  this._list.destroyInfoToolbar(child); }
 if (relation == 'tooltip') {  this._list.destroyTooltip(child); }
-if (relation == 'customData') {  this._list.removeCustomData(child); }
+if (relation == 'customdata') {  this._list.removeCustomData(child);}
 if (relation == 'layoutData') {  this._list.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._list.removeDependent(child); }
+if (relation == 'dependents') {  this._list.removeDependent(child);}
 
       }
       catch(err){}

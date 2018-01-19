@@ -137,15 +137,15 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'sortItems') {  this._viewsettingsdialog.removeSortItem(child); }
-if (relation == 'groupItems') {  this._viewsettingsdialog.removeGroupItem(child); }
-if (relation == 'filterItems') {  this._viewsettingsdialog.removeFilterItem(child); }
-if (relation == 'presetFilterItems') {  this._viewsettingsdialog.removePresetFilterItem(child); }
-if (relation == 'customTabs') {  this._viewsettingsdialog.removeCustomTab(child); }
+               if (relation == 'sortitems') {  this._viewsettingsdialog.removeSortItem(child);}
+if (relation == 'groupitems') {  this._viewsettingsdialog.removeGroupItem(child);}
+if (relation == 'filteritems') {  this._viewsettingsdialog.removeFilterItem(child);}
+if (relation == 'presetfilteritems') {  this._viewsettingsdialog.removePresetFilterItem(child);}
+if (relation == 'customtabs') {  this._viewsettingsdialog.removeCustomTab(child);}
 if (relation == 'tooltip') {  this._viewsettingsdialog.destroyTooltip(child); }
-if (relation == 'customData') {  this._viewsettingsdialog.removeCustomData(child); }
+if (relation == 'customdata') {  this._viewsettingsdialog.removeCustomData(child);}
 if (relation == 'layoutData') {  this._viewsettingsdialog.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._viewsettingsdialog.removeDependent(child); }
+if (relation == 'dependents') {  this._viewsettingsdialog.removeDependent(child);}
 
       }
       catch(err){}

@@ -124,14 +124,14 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       removeChildByRelation(child, relation) {
       try{
                if (relation == 'heading') {  this._dynamicpagetitle.destroyHeading(child); }
-if (relation == 'actions') {  this._dynamicpagetitle.removeAction(child); }
-if (relation == 'content') {  this._dynamicpagetitle.removeContent(child); }
-if (relation == 'snappedContent') {  this._dynamicpagetitle.removeSnappedContent(child); }
-if (relation == 'expandedContent') {  this._dynamicpagetitle.removeExpandedContent(child); }
+if (relation == 'actions') {  this._dynamicpagetitle.removeAction(child);}
+if (relation == 'content') {  this._dynamicpagetitle.removeContent(child);}
+if (relation == 'snappedcontent') {  this._dynamicpagetitle.removeSnappedContent(child);}
+if (relation == 'expandedcontent') {  this._dynamicpagetitle.removeExpandedContent(child);}
 if (relation == 'tooltip') {  this._dynamicpagetitle.destroyTooltip(child); }
-if (relation == 'customData') {  this._dynamicpagetitle.removeCustomData(child); }
+if (relation == 'customdata') {  this._dynamicpagetitle.removeCustomData(child);}
 if (relation == 'layoutData') {  this._dynamicpagetitle.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._dynamicpagetitle.removeDependent(child); }
+if (relation == 'dependents') {  this._dynamicpagetitle.removeDependent(child);}
 
       }
       catch(err){}

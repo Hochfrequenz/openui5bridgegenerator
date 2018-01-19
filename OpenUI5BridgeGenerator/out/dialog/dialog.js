@@ -156,16 +156,16 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'content') {  this._dialog.removeContent(child); }
+               if (relation == 'content') {  this._dialog.removeContent(child);}
 if (relation == 'subHeader') {  this._dialog.destroySubHeader(child); }
 if (relation == 'customHeader') {  this._dialog.destroyCustomHeader(child); }
 if (relation == 'beginButton') {  this._dialog.destroyBeginButton(child); }
 if (relation == 'endButton') {  this._dialog.destroyEndButton(child); }
-if (relation == 'buttons') {  this._dialog.removeButton(child); }
+if (relation == 'buttons') {  this._dialog.removeButton(child);}
 if (relation == 'tooltip') {  this._dialog.destroyTooltip(child); }
-if (relation == 'customData') {  this._dialog.removeCustomData(child); }
+if (relation == 'customdata') {  this._dialog.removeCustomData(child);}
 if (relation == 'layoutData') {  this._dialog.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._dialog.removeDependent(child); }
+if (relation == 'dependents') {  this._dialog.removeDependent(child);}
 
       }
       catch(err){}

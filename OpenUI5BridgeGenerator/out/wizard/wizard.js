@@ -93,7 +93,8 @@ params.complete = this.complete==null ? this.defaultFunc: this.complete;
                                                         this.attributeManager.addAttributes({"ui5-container": '' });
                                                         this.attributeManager.addClasses("ui5-hide");
     }
-        
+        this._wizard.attachStepActivate((event) => { that.lastStep = event.mParameters.index == that._wizard.getSteps().length;; });
+
                                                         //<!container>
            
                                                         //</!container>
@@ -120,11 +121,11 @@ params.complete = this.complete==null ? this.defaultFunc: this.complete;
         var path = jQuery.makeArray($(elem).parentsUntil(this.element));
         for (elem of path) {
         try{
-                 if (elem.localName == 'steps') { var _index = null; if (afterElement) _index = this._wizard.indexOfStep(afterElement); if (_index)this._wizard.insertStep(child, _index + 1); else this._wizard.addStep(child, 0);  return elem.localName; }
+                 if (elem.localName == 'steps') { var _index = null; if (afterElement) _index = this._wizard.indexOfStep(afterElement); if (_index)this._wizard.addStep(child, _index + 1); else this._wizard.addStep(child, 0);  return elem.localName; }
 if (elem.localName == 'tooltip') { this._wizard.setTooltip(child); return elem.localName;}
-if (elem.localName == 'customdata') { var _index = null; if (afterElement) _index = this._wizard.indexOfCustomData(afterElement); if (_index)this._wizard.insertCustomData(child, _index + 1); else this._wizard.addCustomData(child, 0);  return elem.localName; }
+if (elem.localName == 'customdata') { var _index = null; if (afterElement) _index = this._wizard.indexOfCustomData(afterElement); if (_index)this._wizard.addCustomData(child, _index + 1); else this._wizard.addCustomData(child, 0);  return elem.localName; }
 if (elem.localName == 'layoutdata') { this._wizard.setLayoutData(child); return elem.localName;}
-if (elem.localName == 'dependents') { var _index = null; if (afterElement) _index = this._wizard.indexOfDependent(afterElement); if (_index)this._wizard.insertDependent(child, _index + 1); else this._wizard.addDependent(child, 0);  return elem.localName; }
+if (elem.localName == 'dependents') { var _index = null; if (afterElement) _index = this._wizard.indexOfDependent(afterElement); if (_index)this._wizard.addDependent(child, _index + 1); else this._wizard.addDependent(child, 0);  return elem.localName; }
 
            }
            catch(err){}
@@ -132,11 +133,11 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'steps') {  this._wizard.removeStep(child); }
+               if (relation == 'steps') {  this._wizard.removeStep(child);}
 if (relation == 'tooltip') {  this._wizard.destroyTooltip(child); }
-if (relation == 'customData') {  this._wizard.removeCustomData(child); }
+if (relation == 'customdata') {  this._wizard.removeCustomData(child);}
 if (relation == 'layoutData') {  this._wizard.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._wizard.removeDependent(child); }
+if (relation == 'dependents') {  this._wizard.removeDependent(child);}
 
       }
       catch(err){}

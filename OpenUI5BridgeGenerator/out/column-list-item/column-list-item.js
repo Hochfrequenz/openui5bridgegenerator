@@ -128,11 +128,11 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'cells') {  this._columnlistitem.removeCell(child); }
+               if (relation == 'cells') {  this._columnlistitem.removeCell(child);}
 if (relation == 'tooltip') {  this._columnlistitem.destroyTooltip(child); }
-if (relation == 'customData') {  this._columnlistitem.removeCustomData(child); }
+if (relation == 'customdata') {  this._columnlistitem.removeCustomData(child);}
 if (relation == 'layoutData') {  this._columnlistitem.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._columnlistitem.removeDependent(child); }
+if (relation == 'dependents') {  this._columnlistitem.removeDependent(child);}
 
       }
       catch(err){}

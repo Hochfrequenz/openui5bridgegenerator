@@ -115,11 +115,11 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       removeChildByRelation(child, relation) {
       try{
                if (relation == 'label') {  this._formelement.destroyLabel(child); }
-if (relation == 'fields') {  this._formelement.removeField(child); }
+if (relation == 'fields') {  this._formelement.removeField(child);}
 if (relation == 'tooltip') {  this._formelement.destroyTooltip(child); }
-if (relation == 'customData') {  this._formelement.removeCustomData(child); }
+if (relation == 'customdata') {  this._formelement.removeCustomData(child);}
 if (relation == 'layoutData') {  this._formelement.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._formelement.removeDependent(child); }
+if (relation == 'dependents') {  this._formelement.removeDependent(child);}
 
       }
       catch(err){}

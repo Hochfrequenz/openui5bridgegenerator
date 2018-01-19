@@ -157,15 +157,15 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'content') {  this._responsivepopover.removeContent(child); }
+               if (relation == 'content') {  this._responsivepopover.removeContent(child);}
 if (relation == 'customHeader') {  this._responsivepopover.destroyCustomHeader(child); }
 if (relation == 'subHeader') {  this._responsivepopover.destroySubHeader(child); }
 if (relation == 'beginButton') {  this._responsivepopover.destroyBeginButton(child); }
 if (relation == 'endButton') {  this._responsivepopover.destroyEndButton(child); }
 if (relation == 'tooltip') {  this._responsivepopover.destroyTooltip(child); }
-if (relation == 'customData') {  this._responsivepopover.removeCustomData(child); }
+if (relation == 'customdata') {  this._responsivepopover.removeCustomData(child);}
 if (relation == 'layoutData') {  this._responsivepopover.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._responsivepopover.removeDependent(child); }
+if (relation == 'dependents') {  this._responsivepopover.removeDependent(child);}
 
       }
       catch(err){}

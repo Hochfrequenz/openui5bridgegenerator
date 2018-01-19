@@ -142,12 +142,12 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'tileContent') {  this._generictile.removeTileContent(child); }
+               if (relation == 'tilecontent') {  this._generictile.removeTileContent(child);}
 if (relation == 'icon') {  this._generictile.destroyIcon(child); }
 if (relation == 'tooltip') {  this._generictile.destroyTooltip(child); }
-if (relation == 'customData') {  this._generictile.removeCustomData(child); }
+if (relation == 'customdata') {  this._generictile.removeCustomData(child);}
 if (relation == 'layoutData') {  this._generictile.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._generictile.removeDependent(child); }
+if (relation == 'dependents') {  this._generictile.removeDependent(child);}
 
       }
       catch(err){}

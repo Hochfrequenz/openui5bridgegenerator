@@ -137,9 +137,9 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       removeChildByRelation(child, relation) {
       try{
                if (relation == 'tooltip') {  this._datetimefield.destroyTooltip(child); }
-if (relation == 'customData') {  this._datetimefield.removeCustomData(child); }
+if (relation == 'customdata') {  this._datetimefield.removeCustomData(child);}
 if (relation == 'layoutData') {  this._datetimefield.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._datetimefield.removeDependent(child); }
+if (relation == 'dependents') {  this._datetimefield.removeDependent(child);}
 
       }
       catch(err){}

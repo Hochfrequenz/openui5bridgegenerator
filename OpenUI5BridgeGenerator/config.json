@@ -36,9 +36,9 @@
     "SimpleForm": {}
   },
   "sap.f": {
-    "DynamicPage": {},
-    "DynamicPageHeader": {},
-    "DynamicPageTitle": {}
+    "DynamicPage": { "defaultAggregation": "content" },
+    "DynamicPageHeader": { "defaultAggregation": "content" },
+    "DynamicPageTitle": { "defaultAggregation": "content" }
   },
   "sap.m": {
     "InputBase": {},
@@ -52,7 +52,11 @@
     },
     "ColumnListItem": {},
     "DateTimeField": {},
-    "DatePicker": {},
+    "DatePicker": {
+      "events": {
+        "Change": "that.value = event.mParameters.value;"
+      }
+    },
     "Dialog": {},
     "FeedContent": {},
     "UploadCollection": {
@@ -62,7 +66,12 @@
 
 
 
-    "IconTabBar": { "defaultAggregation": "items" },
+    "IconTabBar": {
+      "defaultAggregation": "items",
+      "events": {
+        "Select": "that.selectedKey = event.mParameters.key;"
+      }
+    },
     "IconTabFilter": {},
     "ImageContent": {},
     "Input": {
@@ -92,14 +101,28 @@
     "Page": {},
 
     "ResponsivePopover": { "defaultAggregation": "content" },
-    "SearchField": {},
+    "SearchField": {
+      "events": {
+        "LiveChange": " that.value = event.mParameters.newValue;"
+      }
+    },
     "SegmentedButton": {
       "events": {
         "Select": "that.selectedKey = event.mParameters.key;"
       }
     },
     "SegmentedButtonItem": {},
-    "Select": {},
+    "Select": {
+      "addChild": {
+        "items": " var oldVal = this.selectedKey; this.selectedKey = null; this.selectedKey = oldVal;"
+      },
+      "removeChild": {
+        "items": "  var oldVal = this.selectedKey; this.selectedKey = null; this.selectedKey = oldVal;"
+      },
+      "events": {
+        "Change": "that.selectedItem = event.mParameters.selectedItem;   if (event.mParameters.selectedItem)  that.selectedKey = event.mParameters.selectedItem.mProperties.key;  else    that.selectedKey = null;"
+      }
+    },
     "SelectDialog": {},
     "Shell": {
       "overrideTags": { "app": "content" }
@@ -110,8 +133,8 @@
     "StandardListItem": {},
     "StandardTile": {},
     "Switch": {},
-    "TabContainer": {},
-    "TabContainerItem": {},
+    "TabContainer": { "defaultAggregation": "items" },
+    "TabContainerItem": { "defaultAggregation": "content" },
     "Table": {
       "attachOverride": "if (this._table._oGrowingDelegate){this._table._oGrowingDelegate.updateItems = function(sChangeReason) { this._onBeforePageLoaded(sChangeReason);this._onAfterPageLoaded(sChangeReason); }; }"
     },
@@ -134,6 +157,7 @@
     "ViewSettingsItem": {},
     "ViewSettingsFilterItem": {},
     "Wizard": {
+      "useAddInsteadOfInsert": true,
       "additionalProperties": {
         "lastStep": false
       },

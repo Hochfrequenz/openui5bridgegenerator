@@ -135,9 +135,9 @@ if (relation == 'header') {  this._dynamicpage.destroyHeader(child); }
 if (relation == 'content') {  this._dynamicpage.destroyContent(child); }
 if (relation == 'footer') {  this._dynamicpage.destroyFooter(child); }
 if (relation == 'tooltip') {  this._dynamicpage.destroyTooltip(child); }
-if (relation == 'customData') {  this._dynamicpage.removeCustomData(child); }
+if (relation == 'customdata') {  this._dynamicpage.removeCustomData(child);}
 if (relation == 'layoutData') {  this._dynamicpage.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._dynamicpage.removeDependent(child); }
+if (relation == 'dependents') {  this._dynamicpage.removeDependent(child);}
 
       }
       catch(err){}

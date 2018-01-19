@@ -86,7 +86,8 @@ params.select = this.select==null ? this.defaultFunc: this.select;
                                                         this.attributeManager.addAttributes({"ui5-container": '' });
                                                         this.attributeManager.addClasses("ui5-hide");
     }
-        
+        this._segmentedbutton.attachSelect((event) => { that.selectedKey = event.mParameters.key;; });
+
                                                         //<!container>
            
                                                         //</!container>
@@ -126,12 +127,12 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'buttons') {  this._segmentedbutton.removeButton(child); }
-if (relation == 'items') {  this._segmentedbutton.removeItem(child); }
+               if (relation == 'buttons') {  this._segmentedbutton.removeButton(child);}
+if (relation == 'items') {  this._segmentedbutton.removeItem(child);}
 if (relation == 'tooltip') {  this._segmentedbutton.destroyTooltip(child); }
-if (relation == 'customData') {  this._segmentedbutton.removeCustomData(child); }
+if (relation == 'customdata') {  this._segmentedbutton.removeCustomData(child);}
 if (relation == 'layoutData') {  this._segmentedbutton.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._segmentedbutton.removeDependent(child); }
+if (relation == 'dependents') {  this._segmentedbutton.removeDependent(child);}
 
       }
       catch(err){}

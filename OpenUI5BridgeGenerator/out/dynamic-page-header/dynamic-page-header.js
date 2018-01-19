@@ -119,11 +119,11 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'content') {  this._dynamicpageheader.removeContent(child); }
+               if (relation == 'content') {  this._dynamicpageheader.removeContent(child);}
 if (relation == 'tooltip') {  this._dynamicpageheader.destroyTooltip(child); }
-if (relation == 'customData') {  this._dynamicpageheader.removeCustomData(child); }
+if (relation == 'customdata') {  this._dynamicpageheader.removeCustomData(child);}
 if (relation == 'layoutData') {  this._dynamicpageheader.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._dynamicpageheader.removeDependent(child); }
+if (relation == 'dependents') {  this._dynamicpageheader.removeDependent(child);}
 
       }
       catch(err){}

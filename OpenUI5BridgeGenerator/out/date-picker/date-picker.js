@@ -106,7 +106,8 @@ params.navigate = this.navigate==null ? this.defaultFunc: this.navigate;
                                                         this.attributeManager.addAttributes({"ui5-container": '' });
                                                         this.attributeManager.addClasses("ui5-hide");
     }
-        
+        this._datepicker.attachChange((event) => { that.value = event.mParameters.value;; });
+
                                                         //<!container>
            
                                                         //</!container>
@@ -145,11 +146,11 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'specialDates') {  this._datepicker.removeSpecialDate(child); }
+               if (relation == 'specialdates') {  this._datepicker.removeSpecialDate(child);}
 if (relation == 'tooltip') {  this._datepicker.destroyTooltip(child); }
-if (relation == 'customData') {  this._datepicker.removeCustomData(child); }
+if (relation == 'customdata') {  this._datepicker.removeCustomData(child);}
 if (relation == 'layoutData') {  this._datepicker.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._datepicker.removeDependent(child); }
+if (relation == 'dependents') {  this._datepicker.removeDependent(child);}
 
       }
       catch(err){}

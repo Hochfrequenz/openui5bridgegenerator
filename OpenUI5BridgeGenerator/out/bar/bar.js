@@ -121,13 +121,13 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'contentLeft') {  this._bar.removeContentLeft(child); }
-if (relation == 'contentMiddle') {  this._bar.removeContentMiddle(child); }
-if (relation == 'contentRight') {  this._bar.removeContentRight(child); }
+               if (relation == 'contentleft') {  this._bar.removeContentLeft(child);}
+if (relation == 'contentmiddle') {  this._bar.removeContentMiddle(child);}
+if (relation == 'contentright') {  this._bar.removeContentRight(child);}
 if (relation == 'tooltip') {  this._bar.destroyTooltip(child); }
-if (relation == 'customData') {  this._bar.removeCustomData(child); }
+if (relation == 'customdata') {  this._bar.removeCustomData(child);}
 if (relation == 'layoutData') {  this._bar.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._bar.removeDependent(child); }
+if (relation == 'dependents') {  this._bar.removeDependent(child);}
 
       }
       catch(err){}

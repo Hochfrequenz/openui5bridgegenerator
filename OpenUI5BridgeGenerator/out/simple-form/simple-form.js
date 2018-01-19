@@ -165,13 +165,13 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'content') {  this._simpleform.removeContent(child); }
+               if (relation == 'content') {  this._simpleform.removeContent(child);}
 if (relation == 'title') {  this._simpleform.destroyTitle(child); }
 if (relation == 'toolbar') {  this._simpleform.destroyToolbar(child); }
 if (relation == 'tooltip') {  this._simpleform.destroyTooltip(child); }
-if (relation == 'customData') {  this._simpleform.removeCustomData(child); }
+if (relation == 'customdata') {  this._simpleform.removeCustomData(child);}
 if (relation == 'layoutData') {  this._simpleform.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._simpleform.removeDependent(child); }
+if (relation == 'dependents') {  this._simpleform.removeDependent(child);}
 
       }
       catch(err){}

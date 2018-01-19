@@ -146,16 +146,16 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'content') {  this._page.removeContent(child); }
+               if (relation == 'content') {  this._page.removeContent(child);}
 if (relation == 'customHeader') {  this._page.destroyCustomHeader(child); }
 if (relation == 'footer') {  this._page.destroyFooter(child); }
 if (relation == 'subHeader') {  this._page.destroySubHeader(child); }
-if (relation == 'headerContent') {  this._page.removeHeaderContent(child); }
+if (relation == 'headercontent') {  this._page.removeHeaderContent(child);}
 if (relation == 'landmarkInfo') {  this._page.destroyLandmarkInfo(child); }
 if (relation == 'tooltip') {  this._page.destroyTooltip(child); }
-if (relation == 'customData') {  this._page.removeCustomData(child); }
+if (relation == 'customdata') {  this._page.removeCustomData(child);}
 if (relation == 'layoutData') {  this._page.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._page.removeDependent(child); }
+if (relation == 'dependents') {  this._page.removeDependent(child);}
 
       }
       catch(err){}

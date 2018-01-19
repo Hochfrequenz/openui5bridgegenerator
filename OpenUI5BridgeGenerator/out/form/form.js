@@ -124,14 +124,14 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'formContainers') {  this._form.removeFormContainer(child); }
+               if (relation == 'formcontainers') {  this._form.removeFormContainer(child);}
 if (relation == 'title') {  this._form.destroyTitle(child); }
 if (relation == 'toolbar') {  this._form.destroyToolbar(child); }
 if (relation == 'layout') {  this._form.destroyLayout(child); }
 if (relation == 'tooltip') {  this._form.destroyTooltip(child); }
-if (relation == 'customData') {  this._form.removeCustomData(child); }
+if (relation == 'customdata') {  this._form.removeCustomData(child);}
 if (relation == 'layoutData') {  this._form.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._form.removeDependent(child); }
+if (relation == 'dependents') {  this._form.removeDependent(child);}
 
       }
       catch(err){}

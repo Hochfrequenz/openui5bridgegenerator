@@ -120,9 +120,9 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       removeChildByRelation(child, relation) {
       try{
                if (relation == 'tooltip') {  this._viewsettingsitem.destroyTooltip(child); }
-if (relation == 'customData') {  this._viewsettingsitem.removeCustomData(child); }
+if (relation == 'customdata') {  this._viewsettingsitem.removeCustomData(child);}
 if (relation == 'layoutData') {  this._viewsettingsitem.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._viewsettingsitem.removeDependent(child); }
+if (relation == 'dependents') {  this._viewsettingsitem.removeDependent(child);}
 
       }
       catch(err){}

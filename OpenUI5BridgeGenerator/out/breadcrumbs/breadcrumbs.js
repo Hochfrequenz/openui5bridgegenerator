@@ -119,11 +119,11 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'links') {  this._breadcrumbs.removeLink(child); }
+               if (relation == 'links') {  this._breadcrumbs.removeLink(child);}
 if (relation == 'tooltip') {  this._breadcrumbs.destroyTooltip(child); }
-if (relation == 'customData') {  this._breadcrumbs.removeCustomData(child); }
+if (relation == 'customdata') {  this._breadcrumbs.removeCustomData(child);}
 if (relation == 'layoutData') {  this._breadcrumbs.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._breadcrumbs.removeDependent(child); }
+if (relation == 'dependents') {  this._breadcrumbs.removeDependent(child);}
 
       }
       catch(err){}

@@ -115,7 +115,7 @@ if (elem.localName == 'headerbutton') { this._messageview.setHeaderButton(child)
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'items') {  this._messageview.removeItem(child); }
+               if (relation == 'items') {  this._messageview.removeItem(child);}
 if (relation == 'headerButton') {  this._messageview.destroyHeaderButton(child); }
 
       }

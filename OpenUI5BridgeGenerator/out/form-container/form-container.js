@@ -119,13 +119,13 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'formElements') {  this._formcontainer.removeFormElement(child); }
+               if (relation == 'formelements') {  this._formcontainer.removeFormElement(child);}
 if (relation == 'title') {  this._formcontainer.destroyTitle(child); }
 if (relation == 'toolbar') {  this._formcontainer.destroyToolbar(child); }
 if (relation == 'tooltip') {  this._formcontainer.destroyTooltip(child); }
-if (relation == 'customData') {  this._formcontainer.removeCustomData(child); }
+if (relation == 'customdata') {  this._formcontainer.removeCustomData(child);}
 if (relation == 'layoutData') {  this._formcontainer.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._formcontainer.removeDependent(child); }
+if (relation == 'dependents') {  this._formcontainer.removeDependent(child);}
 
       }
       catch(err){}

@@ -104,7 +104,8 @@ params.suggest = this.suggest==null ? this.defaultFunc: this.suggest;
                                                         this.attributeManager.addAttributes({"ui5-container": '' });
                                                         this.attributeManager.addClasses("ui5-hide");
     }
-        
+        this._searchfield.attachLiveChange((event) => {  that.value = event.mParameters.newValue;; });
+
                                                         //<!container>
            
                                                         //</!container>
@@ -143,11 +144,11 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'suggestionItems') {  this._searchfield.removeSuggestionItem(child); }
+               if (relation == 'suggestionitems') {  this._searchfield.removeSuggestionItem(child);}
 if (relation == 'tooltip') {  this._searchfield.destroyTooltip(child); }
-if (relation == 'customData') {  this._searchfield.removeCustomData(child); }
+if (relation == 'customdata') {  this._searchfield.removeCustomData(child);}
 if (relation == 'layoutData') {  this._searchfield.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._searchfield.removeDependent(child); }
+if (relation == 'dependents') {  this._searchfield.removeDependent(child);}
 
       }
       catch(err){}

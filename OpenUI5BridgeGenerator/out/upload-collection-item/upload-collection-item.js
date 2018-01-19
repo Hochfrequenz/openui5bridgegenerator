@@ -139,13 +139,13 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       }
       removeChildByRelation(child, relation) {
       try{
-               if (relation == 'attributes') {  this._uploadcollectionitem.removeAttribute(child); }
-if (relation == 'statuses') {  this._uploadcollectionitem.removeStatus(child); }
-if (relation == 'markers') {  this._uploadcollectionitem.removeMarker(child); }
+               if (relation == 'attributes') {  this._uploadcollectionitem.removeAttribute(child);}
+if (relation == 'statuses') {  this._uploadcollectionitem.removeStatus(child);}
+if (relation == 'markers') {  this._uploadcollectionitem.removeMarker(child);}
 if (relation == 'tooltip') {  this._uploadcollectionitem.destroyTooltip(child); }
-if (relation == 'customData') {  this._uploadcollectionitem.removeCustomData(child); }
+if (relation == 'customdata') {  this._uploadcollectionitem.removeCustomData(child);}
 if (relation == 'layoutData') {  this._uploadcollectionitem.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._uploadcollectionitem.removeDependent(child); }
+if (relation == 'dependents') {  this._uploadcollectionitem.removeDependent(child);}
 
       }
       catch(err){}

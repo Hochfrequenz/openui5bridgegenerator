@@ -133,9 +133,9 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       try{
                if (relation == 'link') {  this._messagestrip.destroyLink(child); }
 if (relation == 'tooltip') {  this._messagestrip.destroyTooltip(child); }
-if (relation == 'customData') {  this._messagestrip.removeCustomData(child); }
+if (relation == 'customdata') {  this._messagestrip.removeCustomData(child);}
 if (relation == 'layoutData') {  this._messagestrip.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._messagestrip.removeDependent(child); }
+if (relation == 'dependents') {  this._messagestrip.removeDependent(child);}
 
       }
       catch(err){}

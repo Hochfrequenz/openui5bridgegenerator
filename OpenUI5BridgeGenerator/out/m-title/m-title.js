@@ -127,9 +127,9 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       removeChildByRelation(child, relation) {
       try{
                if (relation == 'tooltip') {  this._mtitle.destroyTooltip(child); }
-if (relation == 'customData') {  this._mtitle.removeCustomData(child); }
+if (relation == 'customdata') {  this._mtitle.removeCustomData(child);}
 if (relation == 'layoutData') {  this._mtitle.destroyLayoutData(child); }
-if (relation == 'dependents') {  this._mtitle.removeDependent(child); }
+if (relation == 'dependents') {  this._mtitle.removeDependent(child);}
 
       }
       catch(err){}
