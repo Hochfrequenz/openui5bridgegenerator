@@ -155,7 +155,9 @@
 
     "ViewSettingsDialog": {},
     "ViewSettingsItem": {},
-    "ViewSettingsFilterItem": {},
+    "ViewSettingsFilterItem": {
+      "defaultAggregation": "items"
+    },
     "Wizard": {
       "useAddInsteadOfInsert": true,
       "additionalProperties": {

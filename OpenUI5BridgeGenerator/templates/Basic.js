@@ -22,7 +22,8 @@ export class <classname> <extendsparentClass>{
             return this.<classvar>;
           }
         fillProperties(params){
-               <paramlist>            
+                                        <paramlist>            
+                                            <superfill>   
         }
         defaultFunc() {
                         }
@@ -30,7 +31,6 @@ export class <classname> <extendsparentClass>{
             var that = this;
             var params = {};
             this.fillProperties(params);
-                                         <superfill>   
          if (this.ui5Id)
           this.<classvar> = new <sapClass>(this.ui5Id, params);
         else
