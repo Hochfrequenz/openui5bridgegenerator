@@ -30,7 +30,11 @@ namespace OpenUI5BridgeGenerator
                     var aggName = agg["name"].Value<string>();
                     if (prop.Value["overrideTags"] != null && prop.Value["overrideTags"].Value<JObject>()[aggName] != null)
                         aggName = prop.Value["overrideTags"].Value<JObject>()[aggName].Value<string>();
-                    XElement newAggregationElement = new XElement(aggName);
+                    //special case for title aggregation (which aurelia doesn't like as a tag name)
+                    var nonTitleAggName = aggName;
+                    if (aggName == "title")
+                        nonTitleAggName = "title-elem";
+                    XElement newAggregationElement = new XElement(nonTitleAggName);
                     newAggregationElement.SetAttributeValue("ref", aggName);
                     XElement slotElement = new XElement("slot");
                     slotElement.Value = string.Empty;
@@ -42,7 +46,7 @@ namespace OpenUI5BridgeGenerator
                     }
                     newAggregationElement.Add(slotElement);
                     root.Add(newAggregationElement);
-                    string lowerAggName = aggName.ToLower();
+                    string lowerAggName = nonTitleAggName.ToLower();
                     if (prop.Value["addDefaultSlot"] != null && prop.Value["addDefaultSlot"].Value<bool>() == true)
                     {
                         XElement emptySlot = new XElement("slot");
@@ -53,7 +57,7 @@ namespace OpenUI5BridgeGenerator
                     {
                         addChildBuilder.AppendLine("if (elem.localName == '" + lowerAggName + "') { this." + "_" + objectName.ToLower() + "." + agg["methods"].Value<JArray>()[2].Value<string>() + "(child); return elem.localName;}");
                         removeChildBuilder.AppendLine("if (relation == '" +
-                            aggName + "') {  this." +
+                            lowerAggName + "') {  this." +
                             "_" + objectName.ToLower() +
                             "." + agg["methods"].Value<JArray>()[1].Value<string>() + "(child); }");
                     }
