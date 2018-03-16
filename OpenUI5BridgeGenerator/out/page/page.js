@@ -26,6 +26,7 @@ export class Ui5Page extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -147,14 +148,14 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       removeChildByRelation(child, relation) {
       try{
                if (relation == 'content') {  this._page.removeContent(child);}
-if (relation == 'customHeader') {  this._page.destroyCustomHeader(child); }
+if (relation == 'customheader') {  this._page.destroyCustomHeader(child); }
 if (relation == 'footer') {  this._page.destroyFooter(child); }
-if (relation == 'subHeader') {  this._page.destroySubHeader(child); }
+if (relation == 'subheader') {  this._page.destroySubHeader(child); }
 if (relation == 'headercontent') {  this._page.removeHeaderContent(child);}
-if (relation == 'landmarkInfo') {  this._page.destroyLandmarkInfo(child); }
+if (relation == 'landmarkinfo') {  this._page.destroyLandmarkInfo(child); }
 if (relation == 'tooltip') {  this._page.destroyTooltip(child); }
 if (relation == 'customdata') {  this._page.removeCustomData(child);}
-if (relation == 'layoutData') {  this._page.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._page.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._page.removeDependent(child);}
 
       }
@@ -174,6 +175,7 @@ floatingFooterChanged(newValue){if(this._page!==null){ this._page.setFloatingFoo
 navButtonPressChanged(newValue){if(this._page!==null){ this._page.attachNavButtonPress(newValue);}}
 busyChanged(newValue){if(this._page!==null){ this._page.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._page!==null){ this._page.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._page!==null){ this._page.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._page!==null){ this._page.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._page!==null){ this._page.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

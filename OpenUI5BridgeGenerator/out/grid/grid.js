@@ -21,6 +21,7 @@ export class Ui5Grid extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -134,7 +135,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
                if (relation == 'content') {  this._grid.removeContent(child);}
 if (relation == 'tooltip') {  this._grid.destroyTooltip(child); }
 if (relation == 'customdata') {  this._grid.removeCustomData(child);}
-if (relation == 'layoutData') {  this._grid.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._grid.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._grid.removeDependent(child);}
 
       }
@@ -149,6 +150,7 @@ defaultIndentChanged(newValue){if(this._grid!==null){ this._grid.setDefaultInden
 containerQueryChanged(newValue){if(this._grid!==null){ this._grid.setContainerQuery(getBooleanFromAttributeValue(newValue));}}
 busyChanged(newValue){if(this._grid!==null){ this._grid.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._grid!==null){ this._grid.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._grid!==null){ this._grid.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._grid!==null){ this._grid.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._grid!==null){ this._grid.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

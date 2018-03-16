@@ -31,6 +31,7 @@ export class Ui5Dialog extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -157,14 +158,14 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       removeChildByRelation(child, relation) {
       try{
                if (relation == 'content') {  this._dialog.removeContent(child);}
-if (relation == 'subHeader') {  this._dialog.destroySubHeader(child); }
-if (relation == 'customHeader') {  this._dialog.destroyCustomHeader(child); }
-if (relation == 'beginButton') {  this._dialog.destroyBeginButton(child); }
-if (relation == 'endButton') {  this._dialog.destroyEndButton(child); }
+if (relation == 'subheader') {  this._dialog.destroySubHeader(child); }
+if (relation == 'customheader') {  this._dialog.destroyCustomHeader(child); }
+if (relation == 'beginbutton') {  this._dialog.destroyBeginButton(child); }
+if (relation == 'endbutton') {  this._dialog.destroyEndButton(child); }
 if (relation == 'buttons') {  this._dialog.removeButton(child);}
 if (relation == 'tooltip') {  this._dialog.destroyTooltip(child); }
 if (relation == 'customdata') {  this._dialog.removeCustomData(child);}
-if (relation == 'layoutData') {  this._dialog.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._dialog.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._dialog.removeDependent(child);}
 
       }
@@ -189,6 +190,7 @@ beforeCloseChanged(newValue){if(this._dialog!==null){ this._dialog.attachBeforeC
 afterCloseChanged(newValue){if(this._dialog!==null){ this._dialog.attachAfterClose(newValue);}}
 busyChanged(newValue){if(this._dialog!==null){ this._dialog.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._dialog!==null){ this._dialog.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._dialog!==null){ this._dialog.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._dialog!==null){ this._dialog.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._dialog!==null){ this._dialog.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

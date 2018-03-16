@@ -31,6 +31,7 @@ export class Ui5DateTimeField extends Ui5InputBase{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -138,7 +139,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       try{
                if (relation == 'tooltip') {  this._datetimefield.destroyTooltip(child); }
 if (relation == 'customdata') {  this._datetimefield.removeCustomData(child);}
-if (relation == 'layoutData') {  this._datetimefield.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._datetimefield.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._datetimefield.removeDependent(child);}
 
       }
@@ -163,6 +164,7 @@ requiredChanged(newValue){if(this._datetimefield!==null){ this._datetimefield.se
 changeChanged(newValue){if(this._datetimefield!==null){ this._datetimefield.attachChange(newValue);}}
 busyChanged(newValue){if(this._datetimefield!==null){ this._datetimefield.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._datetimefield!==null){ this._datetimefield.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._datetimefield!==null){ this._datetimefield.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._datetimefield!==null){ this._datetimefield.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._datetimefield!==null){ this._datetimefield.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

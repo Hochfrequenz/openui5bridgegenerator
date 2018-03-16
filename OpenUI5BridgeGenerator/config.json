@@ -91,6 +91,10 @@
     "Title": {
       "overrideName": "mTitle"
     },
+    "MaskInputRule": {},
+    "MaskInput": {},
+    "MenuItem": {},
+    "Menu": {},
     "MessageItem": {},
     "MessageStrip": {},
     "MessageView": {},
@@ -147,7 +151,12 @@
     },
     "TileContainer": {},
     "TileContent": {},
+    "ToggleButton": {},
     "Toolbar": {},
+    "Tree": {},
+    "TreeItemBase": {},
+    "StandardTreeItem": {},
+    "CustomTreeItem": {},
     "OverflowToolbar": {},
     "ToolbarSpacer": {},
     "UploadCollectionItem": {},

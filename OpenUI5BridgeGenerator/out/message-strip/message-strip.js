@@ -21,6 +21,7 @@ export class Ui5MessageStrip extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -134,7 +135,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
                if (relation == 'link') {  this._messagestrip.destroyLink(child); }
 if (relation == 'tooltip') {  this._messagestrip.destroyTooltip(child); }
 if (relation == 'customdata') {  this._messagestrip.removeCustomData(child);}
-if (relation == 'layoutData') {  this._messagestrip.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._messagestrip.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._messagestrip.removeDependent(child);}
 
       }
@@ -149,6 +150,7 @@ enableFormattedTextChanged(newValue){if(this._messagestrip!==null){ this._messag
 closeChanged(newValue){if(this._messagestrip!==null){ this._messagestrip.attachClose(newValue);}}
 busyChanged(newValue){if(this._messagestrip!==null){ this._messagestrip.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._messagestrip!==null){ this._messagestrip.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._messagestrip!==null){ this._messagestrip.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._messagestrip!==null){ this._messagestrip.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._messagestrip!==null){ this._messagestrip.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

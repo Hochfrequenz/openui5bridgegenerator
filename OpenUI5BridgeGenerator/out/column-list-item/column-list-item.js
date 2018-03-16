@@ -24,6 +24,7 @@ export class Ui5ColumnListItem extends Ui5ListItemBase{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -131,7 +132,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
                if (relation == 'cells') {  this._columnlistitem.removeCell(child);}
 if (relation == 'tooltip') {  this._columnlistitem.destroyTooltip(child); }
 if (relation == 'customdata') {  this._columnlistitem.removeCustomData(child);}
-if (relation == 'layoutData') {  this._columnlistitem.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._columnlistitem.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._columnlistitem.removeDependent(child);}
 
       }
@@ -149,6 +150,7 @@ pressChanged(newValue){if(this._columnlistitem!==null){ this._columnlistitem.att
 detailPressChanged(newValue){if(this._columnlistitem!==null){ this._columnlistitem.attachDetailPress(newValue);}}
 busyChanged(newValue){if(this._columnlistitem!==null){ this._columnlistitem.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._columnlistitem!==null){ this._columnlistitem.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._columnlistitem!==null){ this._columnlistitem.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._columnlistitem!==null){ this._columnlistitem.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._columnlistitem!==null){ this._columnlistitem.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

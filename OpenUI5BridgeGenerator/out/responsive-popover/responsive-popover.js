@@ -32,6 +32,7 @@ export class Ui5ResponsivePopover extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -158,13 +159,13 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       removeChildByRelation(child, relation) {
       try{
                if (relation == 'content') {  this._responsivepopover.removeContent(child);}
-if (relation == 'customHeader') {  this._responsivepopover.destroyCustomHeader(child); }
-if (relation == 'subHeader') {  this._responsivepopover.destroySubHeader(child); }
-if (relation == 'beginButton') {  this._responsivepopover.destroyBeginButton(child); }
-if (relation == 'endButton') {  this._responsivepopover.destroyEndButton(child); }
+if (relation == 'customheader') {  this._responsivepopover.destroyCustomHeader(child); }
+if (relation == 'subheader') {  this._responsivepopover.destroySubHeader(child); }
+if (relation == 'beginbutton') {  this._responsivepopover.destroyBeginButton(child); }
+if (relation == 'endbutton') {  this._responsivepopover.destroyEndButton(child); }
 if (relation == 'tooltip') {  this._responsivepopover.destroyTooltip(child); }
 if (relation == 'customdata') {  this._responsivepopover.removeCustomData(child);}
-if (relation == 'layoutData') {  this._responsivepopover.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._responsivepopover.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._responsivepopover.removeDependent(child);}
 
       }
@@ -190,6 +191,7 @@ beforeCloseChanged(newValue){if(this._responsivepopover!==null){ this._responsiv
 afterCloseChanged(newValue){if(this._responsivepopover!==null){ this._responsivepopover.attachAfterClose(newValue);}}
 busyChanged(newValue){if(this._responsivepopover!==null){ this._responsivepopover.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._responsivepopover!==null){ this._responsivepopover.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._responsivepopover!==null){ this._responsivepopover.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._responsivepopover!==null){ this._responsivepopover.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._responsivepopover!==null){ this._responsivepopover.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

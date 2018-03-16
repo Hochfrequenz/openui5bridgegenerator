@@ -37,6 +37,7 @@ export class Ui5DatePicker extends Ui5DateTimeField{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -149,7 +150,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
                if (relation == 'specialdates') {  this._datepicker.removeSpecialDate(child);}
 if (relation == 'tooltip') {  this._datepicker.destroyTooltip(child); }
 if (relation == 'customdata') {  this._datepicker.removeCustomData(child);}
-if (relation == 'layoutData') {  this._datepicker.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._datepicker.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._datepicker.removeDependent(child);}
 
       }
@@ -180,6 +181,7 @@ requiredChanged(newValue){if(this._datepicker!==null){ this._datepicker.setRequi
 changeChanged(newValue){if(this._datepicker!==null){ this._datepicker.attachChange(newValue);}}
 busyChanged(newValue){if(this._datepicker!==null){ this._datepicker.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._datepicker!==null){ this._datepicker.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._datepicker!==null){ this._datepicker.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._datepicker!==null){ this._datepicker.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._datepicker!==null){ this._datepicker.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

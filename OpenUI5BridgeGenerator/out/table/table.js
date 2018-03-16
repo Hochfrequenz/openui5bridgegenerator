@@ -14,6 +14,8 @@ export class Ui5Table extends Ui5ListBase{
         @bindable() backgroundDesign = 'Translucent';
 @bindable() fixedLayout = true;
 @bindable() showOverlay = false;
+@bindable() alternateRowColors = false;
+@bindable() popinLayout = 'Block';
 /* inherited from sap.m.ListBase*/
 @bindable() inset = false;
 @bindable() headerText = null;
@@ -44,6 +46,7 @@ export class Ui5Table extends Ui5ListBase{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -70,6 +73,8 @@ export class Ui5Table extends Ui5ListBase{
                                         params.backgroundDesign = this.backgroundDesign;
 params.fixedLayout = getBooleanFromAttributeValue(this.fixedLayout);
 params.showOverlay = getBooleanFromAttributeValue(this.showOverlay);
+params.alternateRowColors = getBooleanFromAttributeValue(this.alternateRowColors);
+params.popinLayout = this.popinLayout;
             
                                             super.fillProperties(params);   
         }
@@ -156,12 +161,12 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       try{
                if (relation == 'columns') {  this._table.removeColumn(child);}
 if (relation == 'items') {  this._table.removeItem(child);}
-if (relation == 'swipeContent') {  this._table.destroySwipeContent(child); }
-if (relation == 'headerToolbar') {  this._table.destroyHeaderToolbar(child); }
-if (relation == 'infoToolbar') {  this._table.destroyInfoToolbar(child); }
+if (relation == 'swipecontent') {  this._table.destroySwipeContent(child); }
+if (relation == 'headertoolbar') {  this._table.destroyHeaderToolbar(child); }
+if (relation == 'infotoolbar') {  this._table.destroyInfoToolbar(child); }
 if (relation == 'tooltip') {  this._table.destroyTooltip(child); }
 if (relation == 'customdata') {  this._table.removeCustomData(child);}
-if (relation == 'layoutData') {  this._table.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._table.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._table.removeDependent(child);}
 
       }
@@ -170,6 +175,8 @@ if (relation == 'dependents') {  this._table.removeDependent(child);}
     backgroundDesignChanged(newValue){if(this._table!==null){ this._table.setBackgroundDesign(newValue);}}
 fixedLayoutChanged(newValue){if(this._table!==null){ this._table.setFixedLayout(getBooleanFromAttributeValue(newValue));}}
 showOverlayChanged(newValue){if(this._table!==null){ this._table.setShowOverlay(getBooleanFromAttributeValue(newValue));}}
+alternateRowColorsChanged(newValue){if(this._table!==null){ this._table.setAlternateRowColors(getBooleanFromAttributeValue(newValue));}}
+popinLayoutChanged(newValue){if(this._table!==null){ this._table.setPopinLayout(newValue);}}
 insetChanged(newValue){if(this._table!==null){ this._table.setInset(getBooleanFromAttributeValue(newValue));}}
 headerTextChanged(newValue){if(this._table!==null){ this._table.setHeaderText(newValue);}}
 footerTextChanged(newValue){if(this._table!==null){ this._table.setFooterText(newValue);}}
@@ -199,6 +206,7 @@ updateFinishedChanged(newValue){if(this._table!==null){ this._table.attachUpdate
 itemPressChanged(newValue){if(this._table!==null){ this._table.attachItemPress(newValue);}}
 busyChanged(newValue){if(this._table!==null){ this._table.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._table!==null){ this._table.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._table!==null){ this._table.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._table!==null){ this._table.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._table!==null){ this._table.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

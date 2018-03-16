@@ -19,6 +19,7 @@ export class Ui5FormattedText extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -128,7 +129,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       try{
                if (relation == 'tooltip') {  this._formattedtext.destroyTooltip(child); }
 if (relation == 'customdata') {  this._formattedtext.removeCustomData(child);}
-if (relation == 'layoutData') {  this._formattedtext.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._formattedtext.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._formattedtext.removeDependent(child);}
 
       }
@@ -141,6 +142,7 @@ convertedLinksDefaultTargetChanged(newValue){if(this._formattedtext!==null){ thi
 heightChanged(newValue){if(this._formattedtext!==null){ this._formattedtext.setHeight(newValue);}}
 busyChanged(newValue){if(this._formattedtext!==null){ this._formattedtext.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._formattedtext!==null){ this._formattedtext.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._formattedtext!==null){ this._formattedtext.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._formattedtext!==null){ this._formattedtext.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._formattedtext!==null){ this._formattedtext.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

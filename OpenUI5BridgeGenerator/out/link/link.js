@@ -25,6 +25,7 @@ export class Ui5Link extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -140,7 +141,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       try{
                if (relation == 'tooltip') {  this._link.destroyTooltip(child); }
 if (relation == 'customdata') {  this._link.removeCustomData(child);}
-if (relation == 'layoutData') {  this._link.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._link.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._link.removeDependent(child);}
 
       }
@@ -159,6 +160,7 @@ emphasizedChanged(newValue){if(this._link!==null){ this._link.setEmphasized(getB
 pressChanged(newValue){if(this._link!==null){ this._link.attachPress(newValue);}}
 busyChanged(newValue){if(this._link!==null){ this._link.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._link!==null){ this._link.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._link!==null){ this._link.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._link!==null){ this._link.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._link!==null){ this._link.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

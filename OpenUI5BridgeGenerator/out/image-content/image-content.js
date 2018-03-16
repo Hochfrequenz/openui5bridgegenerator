@@ -17,6 +17,7 @@ export class Ui5ImageContent extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -124,7 +125,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       try{
                if (relation == 'tooltip') {  this._imagecontent.destroyTooltip(child); }
 if (relation == 'customdata') {  this._imagecontent.removeCustomData(child);}
-if (relation == 'layoutData') {  this._imagecontent.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._imagecontent.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._imagecontent.removeDependent(child);}
 
       }
@@ -135,6 +136,7 @@ descriptionChanged(newValue){if(this._imagecontent!==null){ this._imagecontent.s
 pressChanged(newValue){if(this._imagecontent!==null){ this._imagecontent.attachPress(newValue);}}
 busyChanged(newValue){if(this._imagecontent!==null){ this._imagecontent.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._imagecontent!==null){ this._imagecontent.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._imagecontent!==null){ this._imagecontent.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._imagecontent!==null){ this._imagecontent.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._imagecontent!==null){ this._imagecontent.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

@@ -23,6 +23,7 @@ export class Ui5ActionSheet extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -138,7 +139,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
                if (relation == 'buttons') {  this._actionsheet.removeButton(child);}
 if (relation == 'tooltip') {  this._actionsheet.destroyTooltip(child); }
 if (relation == 'customdata') {  this._actionsheet.removeCustomData(child);}
-if (relation == 'layoutData') {  this._actionsheet.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._actionsheet.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._actionsheet.removeDependent(child);}
 
       }
@@ -155,6 +156,7 @@ afterCloseChanged(newValue){if(this._actionsheet!==null){ this._actionsheet.atta
 cancelButtonPressChanged(newValue){if(this._actionsheet!==null){ this._actionsheet.attachCancelButtonPress(newValue);}}
 busyChanged(newValue){if(this._actionsheet!==null){ this._actionsheet.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._actionsheet!==null){ this._actionsheet.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._actionsheet!==null){ this._actionsheet.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._actionsheet!==null){ this._actionsheet.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._actionsheet!==null){ this._actionsheet.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

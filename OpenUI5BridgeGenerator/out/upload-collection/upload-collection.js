@@ -40,6 +40,7 @@ export class Ui5UploadCollection extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -177,10 +178,10 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
 if (relation == 'headerparameters') {  this._uploadcollection.removeHeaderParameter(child);}
 if (relation == 'parameters') {  this._uploadcollection.removeParameter(child);}
 if (relation == 'toolbar') {  this._uploadcollection.destroyToolbar(child); }
-if (relation == 'infoToolbar') {  this._uploadcollection.destroyInfoToolbar(child); }
+if (relation == 'infotoolbar') {  this._uploadcollection.destroyInfoToolbar(child); }
 if (relation == 'tooltip') {  this._uploadcollection.destroyTooltip(child); }
 if (relation == 'customdata') {  this._uploadcollection.removeCustomData(child);}
-if (relation == 'layoutData') {  this._uploadcollection.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._uploadcollection.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._uploadcollection.removeDependent(child);}
 
       }
@@ -214,6 +215,7 @@ beforeUploadStartsChanged(newValue){if(this._uploadcollection!==null){ this._upl
 selectionChangeChanged(newValue){if(this._uploadcollection!==null){ this._uploadcollection.attachSelectionChange(newValue);}}
 busyChanged(newValue){if(this._uploadcollection!==null){ this._uploadcollection.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._uploadcollection!==null){ this._uploadcollection.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._uploadcollection!==null){ this._uploadcollection.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._uploadcollection!==null){ this._uploadcollection.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._uploadcollection!==null){ this._uploadcollection.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

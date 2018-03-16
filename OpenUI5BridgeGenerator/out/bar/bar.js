@@ -15,6 +15,7 @@ export class Ui5Bar extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -126,7 +127,7 @@ if (relation == 'contentmiddle') {  this._bar.removeContentMiddle(child);}
 if (relation == 'contentright') {  this._bar.removeContentRight(child);}
 if (relation == 'tooltip') {  this._bar.destroyTooltip(child); }
 if (relation == 'customdata') {  this._bar.removeCustomData(child);}
-if (relation == 'layoutData') {  this._bar.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._bar.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._bar.removeDependent(child);}
 
       }
@@ -135,6 +136,7 @@ if (relation == 'dependents') {  this._bar.removeDependent(child);}
     designChanged(newValue){if(this._bar!==null){ this._bar.setDesign(newValue);}}
 busyChanged(newValue){if(this._bar!==null){ this._bar.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._bar!==null){ this._bar.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._bar!==null){ this._bar.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._bar!==null){ this._bar.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._bar!==null){ this._bar.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

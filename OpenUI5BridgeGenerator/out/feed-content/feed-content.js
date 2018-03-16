@@ -20,6 +20,7 @@ export class Ui5FeedContent extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -130,7 +131,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       try{
                if (relation == 'tooltip') {  this._feedcontent.destroyTooltip(child); }
 if (relation == 'customdata') {  this._feedcontent.removeCustomData(child);}
-if (relation == 'layoutData') {  this._feedcontent.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._feedcontent.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._feedcontent.removeDependent(child);}
 
       }
@@ -144,6 +145,7 @@ truncateValueToChanged(newValue){if(this._feedcontent!==null){ this._feedcontent
 pressChanged(newValue){if(this._feedcontent!==null){ this._feedcontent.attachPress(newValue);}}
 busyChanged(newValue){if(this._feedcontent!==null){ this._feedcontent.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._feedcontent!==null){ this._feedcontent.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._feedcontent!==null){ this._feedcontent.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._feedcontent!==null){ this._feedcontent.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._feedcontent!==null){ this._feedcontent.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

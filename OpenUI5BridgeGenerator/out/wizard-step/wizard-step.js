@@ -19,6 +19,7 @@ export class Ui5WizardStep extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -130,7 +131,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
                if (relation == 'content') {  this._wizardstep.removeContent(child);}
 if (relation == 'tooltip') {  this._wizardstep.destroyTooltip(child); }
 if (relation == 'customdata') {  this._wizardstep.removeCustomData(child);}
-if (relation == 'layoutData') {  this._wizardstep.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._wizardstep.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._wizardstep.removeDependent(child);}
 
       }
@@ -143,6 +144,7 @@ completeChanged(newValue){if(this._wizardstep!==null){ this._wizardstep.attachCo
 activateChanged(newValue){if(this._wizardstep!==null){ this._wizardstep.attachActivate(newValue);}}
 busyChanged(newValue){if(this._wizardstep!==null){ this._wizardstep.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._wizardstep!==null){ this._wizardstep.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._wizardstep!==null){ this._wizardstep.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._wizardstep!==null){ this._wizardstep.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._wizardstep!==null){ this._wizardstep.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

@@ -22,6 +22,7 @@ export class Ui5ListItemBase extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -134,7 +135,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       try{
                if (relation == 'tooltip') {  this._listitembase.destroyTooltip(child); }
 if (relation == 'customdata') {  this._listitembase.removeCustomData(child);}
-if (relation == 'layoutData') {  this._listitembase.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._listitembase.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._listitembase.removeDependent(child);}
 
       }
@@ -150,6 +151,7 @@ pressChanged(newValue){if(this._listitembase!==null){ this._listitembase.attachP
 detailPressChanged(newValue){if(this._listitembase!==null){ this._listitembase.attachDetailPress(newValue);}}
 busyChanged(newValue){if(this._listitembase!==null){ this._listitembase.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._listitembase!==null){ this._listitembase.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._listitembase!==null){ this._listitembase.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._listitembase!==null){ this._listitembase.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._listitembase!==null){ this._listitembase.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

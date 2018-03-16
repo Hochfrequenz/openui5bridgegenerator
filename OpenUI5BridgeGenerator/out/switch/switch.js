@@ -21,6 +21,7 @@ export class Ui5Switch extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -132,7 +133,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       try{
                if (relation == 'tooltip') {  this._switch.destroyTooltip(child); }
 if (relation == 'customdata') {  this._switch.removeCustomData(child);}
-if (relation == 'layoutData') {  this._switch.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._switch.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._switch.removeDependent(child);}
 
       }
@@ -147,6 +148,7 @@ typeChanged(newValue){if(this._switch!==null){ this._switch.setType(newValue);}}
 changeChanged(newValue){if(this._switch!==null){ this._switch.attachChange(newValue);}}
 busyChanged(newValue){if(this._switch!==null){ this._switch.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._switch!==null){ this._switch.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._switch!==null){ this._switch.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._switch!==null){ this._switch.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._switch!==null){ this._switch.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

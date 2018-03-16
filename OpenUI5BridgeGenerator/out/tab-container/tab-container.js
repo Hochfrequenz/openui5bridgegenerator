@@ -18,6 +18,7 @@ export class Ui5TabContainer extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -128,7 +129,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
                if (relation == 'items') {  this._tabcontainer.removeItem(child);}
 if (relation == 'tooltip') {  this._tabcontainer.destroyTooltip(child); }
 if (relation == 'customdata') {  this._tabcontainer.removeCustomData(child);}
-if (relation == 'layoutData') {  this._tabcontainer.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._tabcontainer.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._tabcontainer.removeDependent(child);}
 
       }
@@ -140,6 +141,7 @@ itemSelectChanged(newValue){if(this._tabcontainer!==null){ this._tabcontainer.at
 addNewButtonPressChanged(newValue){if(this._tabcontainer!==null){ this._tabcontainer.attachAddNewButtonPress(newValue);}}
 busyChanged(newValue){if(this._tabcontainer!==null){ this._tabcontainer.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._tabcontainer!==null){ this._tabcontainer.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._tabcontainer!==null){ this._tabcontainer.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._tabcontainer!==null){ this._tabcontainer.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._tabcontainer!==null){ this._tabcontainer.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

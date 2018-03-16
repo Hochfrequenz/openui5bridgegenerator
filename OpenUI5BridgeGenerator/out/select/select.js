@@ -30,6 +30,7 @@ export class Ui5Select extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -153,7 +154,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
                if (relation == 'items') {  this._select.removeItem(child);  var oldVal = this.selectedKey; this.selectedKey = null; this.selectedKey = oldVal;}
 if (relation == 'tooltip') {  this._select.destroyTooltip(child); }
 if (relation == 'customdata') {  this._select.removeCustomData(child);}
-if (relation == 'layoutData') {  this._select.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._select.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._select.removeDependent(child);}
 
       }
@@ -177,6 +178,7 @@ forceSelectionChanged(newValue){if(this._select!==null){ this._select.setForceSe
 changeChanged(newValue){if(this._select!==null){ this._select.attachChange(newValue);}}
 busyChanged(newValue){if(this._select!==null){ this._select.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._select!==null){ this._select.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._select!==null){ this._select.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._select!==null){ this._select.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._select!==null){ this._select.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

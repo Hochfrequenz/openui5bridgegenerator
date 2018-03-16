@@ -40,6 +40,7 @@ export class Ui5ListBase extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -173,12 +174,12 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       removeChildByRelation(child, relation) {
       try{
                if (relation == 'items') {  this._listbase.removeItem(child);}
-if (relation == 'swipeContent') {  this._listbase.destroySwipeContent(child); }
-if (relation == 'headerToolbar') {  this._listbase.destroyHeaderToolbar(child); }
-if (relation == 'infoToolbar') {  this._listbase.destroyInfoToolbar(child); }
+if (relation == 'swipecontent') {  this._listbase.destroySwipeContent(child); }
+if (relation == 'headertoolbar') {  this._listbase.destroyHeaderToolbar(child); }
+if (relation == 'infotoolbar') {  this._listbase.destroyInfoToolbar(child); }
 if (relation == 'tooltip') {  this._listbase.destroyTooltip(child); }
 if (relation == 'customdata') {  this._listbase.removeCustomData(child);}
-if (relation == 'layoutData') {  this._listbase.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._listbase.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._listbase.removeDependent(child);}
 
       }
@@ -212,6 +213,7 @@ updateFinishedChanged(newValue){if(this._listbase!==null){ this._listbase.attach
 itemPressChanged(newValue){if(this._listbase!==null){ this._listbase.attachItemPress(newValue);}}
 busyChanged(newValue){if(this._listbase!==null){ this._listbase.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._listbase!==null){ this._listbase.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._listbase!==null){ this._listbase.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._listbase!==null){ this._listbase.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._listbase!==null){ this._listbase.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

@@ -14,10 +14,11 @@ export class Ui5SegmentedButton extends Ui5Control{
         @bindable() width = null;
 @bindable() enabled = true;
 @bindable() selectedKey = '';
-@bindable() select = this.defaultFunc;
+@bindable() selectionChange = this.defaultFunc;
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -44,7 +45,7 @@ export class Ui5SegmentedButton extends Ui5Control{
                                         params.width = this.width;
 params.enabled = getBooleanFromAttributeValue(this.enabled);
 params.selectedKey = this.selectedKey;
-params.select = this.select==null ? this.defaultFunc: this.select;
+params.selectionChange = this.selectionChange==null ? this.defaultFunc: this.selectionChange;
             
                                             super.fillProperties(params);   
         }
@@ -131,7 +132,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
 if (relation == 'items') {  this._segmentedbutton.removeItem(child);}
 if (relation == 'tooltip') {  this._segmentedbutton.destroyTooltip(child); }
 if (relation == 'customdata') {  this._segmentedbutton.removeCustomData(child);}
-if (relation == 'layoutData') {  this._segmentedbutton.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._segmentedbutton.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._segmentedbutton.removeDependent(child);}
 
       }
@@ -140,9 +141,10 @@ if (relation == 'dependents') {  this._segmentedbutton.removeDependent(child);}
     widthChanged(newValue){if(this._segmentedbutton!==null){ this._segmentedbutton.setWidth(newValue);}}
 enabledChanged(newValue){if(this._segmentedbutton!==null){ this._segmentedbutton.setEnabled(getBooleanFromAttributeValue(newValue));}}
 selectedKeyChanged(newValue){if(this._segmentedbutton!==null){ this._segmentedbutton.setSelectedKey(newValue);}}
-selectChanged(newValue){if(this._segmentedbutton!==null){ this._segmentedbutton.attachSelect(newValue);}}
+selectionChangeChanged(newValue){if(this._segmentedbutton!==null){ this._segmentedbutton.attachSelectionChange(newValue);}}
 busyChanged(newValue){if(this._segmentedbutton!==null){ this._segmentedbutton.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._segmentedbutton!==null){ this._segmentedbutton.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._segmentedbutton!==null){ this._segmentedbutton.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._segmentedbutton!==null){ this._segmentedbutton.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._segmentedbutton!==null){ this._segmentedbutton.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

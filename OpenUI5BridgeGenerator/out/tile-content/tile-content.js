@@ -19,6 +19,7 @@ export class Ui5TileContent extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -130,7 +131,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
                if (relation == 'content') {  this._tilecontent.destroyContent(child); }
 if (relation == 'tooltip') {  this._tilecontent.destroyTooltip(child); }
 if (relation == 'customdata') {  this._tilecontent.removeCustomData(child);}
-if (relation == 'layoutData') {  this._tilecontent.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._tilecontent.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._tilecontent.removeDependent(child);}
 
       }
@@ -143,6 +144,7 @@ disabledChanged(newValue){if(this._tilecontent!==null){ this._tilecontent.setDis
 frameTypeChanged(newValue){if(this._tilecontent!==null){ this._tilecontent.setFrameType(newValue);}}
 busyChanged(newValue){if(this._tilecontent!==null){ this._tilecontent.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._tilecontent!==null){ this._tilecontent.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._tilecontent!==null){ this._tilecontent.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._tilecontent!==null){ this._tilecontent.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._tilecontent!==null){ this._tilecontent.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

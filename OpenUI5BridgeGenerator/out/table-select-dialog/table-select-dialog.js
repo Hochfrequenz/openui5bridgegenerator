@@ -25,6 +25,7 @@ export class Ui5TableSelectDialog extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -144,7 +145,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
 if (relation == 'columns') {  this._tableselectdialog.removeColumn(child);}
 if (relation == 'tooltip') {  this._tableselectdialog.destroyTooltip(child); }
 if (relation == 'customdata') {  this._tableselectdialog.removeCustomData(child);}
-if (relation == 'layoutData') {  this._tableselectdialog.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._tableselectdialog.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._tableselectdialog.removeDependent(child);}
 
       }
@@ -163,6 +164,7 @@ liveChangeChanged(newValue){if(this._tableselectdialog!==null){ this._tableselec
 cancelChanged(newValue){if(this._tableselectdialog!==null){ this._tableselectdialog.attachCancel(newValue);}}
 busyChanged(newValue){if(this._tableselectdialog!==null){ this._tableselectdialog.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._tableselectdialog!==null){ this._tableselectdialog.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._tableselectdialog!==null){ this._tableselectdialog.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._tableselectdialog!==null){ this._tableselectdialog.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._tableselectdialog!==null){ this._tableselectdialog.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

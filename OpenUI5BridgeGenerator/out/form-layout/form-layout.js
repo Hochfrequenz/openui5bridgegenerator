@@ -15,6 +15,7 @@ export class Ui5FormLayout extends Ui5Control{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -120,7 +121,7 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       try{
                if (relation == 'tooltip') {  this._formlayout.destroyTooltip(child); }
 if (relation == 'customdata') {  this._formlayout.removeCustomData(child);}
-if (relation == 'layoutData') {  this._formlayout.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._formlayout.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._formlayout.removeDependent(child);}
 
       }
@@ -129,6 +130,7 @@ if (relation == 'dependents') {  this._formlayout.removeDependent(child);}
     backgroundDesignChanged(newValue){if(this._formlayout!==null){ this._formlayout.setBackgroundDesign(newValue);}}
 busyChanged(newValue){if(this._formlayout!==null){ this._formlayout.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._formlayout!==null){ this._formlayout.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._formlayout!==null){ this._formlayout.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._formlayout!==null){ this._formlayout.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._formlayout!==null){ this._formlayout.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/

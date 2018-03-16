@@ -42,6 +42,7 @@ export class Ui5List extends Ui5ListBase{
 /* inherited from sap.ui.core.Control*/
 @bindable() busy = false;
 @bindable() busyIndicatorDelay = 1000;
+@bindable() busyIndicatorSize = 'Medium';
 @bindable() visible = true;
 @bindable() fieldGroupIds = '[]';
 @bindable() validateFieldGroup = this.defaultFunc;
@@ -152,12 +153,12 @@ if (elem.localName == 'dependents') { var _index = null; if (afterElement) _inde
       try{
                if (relation == 'columns') {  this._list.removeColumn(child);}
 if (relation == 'items') {  this._list.removeItem(child);}
-if (relation == 'swipeContent') {  this._list.destroySwipeContent(child); }
-if (relation == 'headerToolbar') {  this._list.destroyHeaderToolbar(child); }
-if (relation == 'infoToolbar') {  this._list.destroyInfoToolbar(child); }
+if (relation == 'swipecontent') {  this._list.destroySwipeContent(child); }
+if (relation == 'headertoolbar') {  this._list.destroyHeaderToolbar(child); }
+if (relation == 'infotoolbar') {  this._list.destroyInfoToolbar(child); }
 if (relation == 'tooltip') {  this._list.destroyTooltip(child); }
 if (relation == 'customdata') {  this._list.removeCustomData(child);}
-if (relation == 'layoutData') {  this._list.destroyLayoutData(child); }
+if (relation == 'layoutdata') {  this._list.destroyLayoutData(child); }
 if (relation == 'dependents') {  this._list.removeDependent(child);}
 
       }
@@ -193,6 +194,7 @@ updateFinishedChanged(newValue){if(this._list!==null){ this._list.attachUpdateFi
 itemPressChanged(newValue){if(this._list!==null){ this._list.attachItemPress(newValue);}}
 busyChanged(newValue){if(this._list!==null){ this._list.setBusy(getBooleanFromAttributeValue(newValue));}}
 busyIndicatorDelayChanged(newValue){if(this._list!==null){ this._list.setBusyIndicatorDelay(newValue);}}
+busyIndicatorSizeChanged(newValue){if(this._list!==null){ this._list.setBusyIndicatorSize(newValue);}}
 visibleChanged(newValue){if(this._list!==null){ this._list.setVisible(getBooleanFromAttributeValue(newValue));}}
 fieldGroupIdsChanged(newValue){if(this._list!==null){ this._list.setFieldGroupIds(newValue);}}
 /* inherited from sap.ui.core.Control*/
