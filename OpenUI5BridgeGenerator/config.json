@@ -57,6 +57,11 @@
         "Change": "that.value = event.mParameters.value;"
       }
     },
+    "DateTimePicker": {
+      "events": {
+        "Change": "that.value = event.mParameters.value;"
+      }
+    },
     "Dialog": {},
     "FeedContent": {},
     "UploadCollection": {

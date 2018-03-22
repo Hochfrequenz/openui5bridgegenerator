@@ -87,7 +87,7 @@ namespace OpenUI5BridgeGenerator
                 }
             }
         }
-        protected void AddParentPropertiesAndEvents(string objectName, string parentName, JArray parentProperties, JArray parentEvents, StringBuilder propertyBuilder, StringBuilder changeHandlerBuilder)
+        protected void AddParentPropertiesAndEvents(string objectName, string parentName, JArray parentProperties, JArray parentEvents, StringBuilder propertyBuilder, StringBuilder changeHandlerBuilder, StringBuilder specialEventBuilder, JObject parentEventArgs)
         {
             propertyBuilder.AppendLine("/* inherited from " + parentName + "*/");
             foreach (var property in parentProperties)
@@ -136,7 +136,9 @@ namespace OpenUI5BridgeGenerator
                         "." +
                         property["methods"].Value<JArray>()[1].Value<string>() +
                         newValue);
+                    
                 }
+               
             }
             changeHandlerBuilder.AppendLine("/* inherited from " + parentName + "*/");
             foreach (var ev in parentEvents)
@@ -156,6 +158,15 @@ namespace OpenUI5BridgeGenerator
                     "(newValue);}}");
                 }
             }
+            if (parentEventArgs != null)
+            {
+                foreach (var evObj in parentEventArgs.Properties())
+                {
+                    specialEventBuilder.AppendLine("this." +
+                        "_" + objectName.ToLower() +
+                        ".attach" + evObj.Name + "((event) => { " + evObj.Value.Value<string>() + "; });");
+                }
+            }
         }
         public void Compile(string path, string outputPath)
         {
@@ -165,6 +176,7 @@ namespace OpenUI5BridgeGenerator
             var configObject = (JObject)Newtonsoft.Json.Linq.JObject.ReadFrom(new JsonTextReader(System.IO.File.OpenText("./config.json")));
             Dictionary<string, JArray> parentProperties = new Dictionary<string, JArray>();
             Dictionary<string, JArray> parentEvents = new Dictionary<string, JArray>();
+            Dictionary<string, JObject> parentEventArgs = new Dictionary<string, JObject>();
             Dictionary<string, JArray> parentAggregations = new Dictionary<string, JArray>();
             Dictionary<string, string> parentRelations = new Dictionary<string, string>();
             Dictionary<string, string> parentDefaultAggregation = new Dictionary<string, string>();
@@ -313,6 +325,7 @@ namespace OpenUI5BridgeGenerator
                         if (events != null)
                         {
                             parentEvents.Add(uiObject["name"].Value<string>(), events.Value as JArray);
+
                             foreach (var ev in (events.Value as JArray))
                             {
                                 if (ev["visibility"].Value<string>() == "public" && ev["deprecated"] == null)
@@ -335,6 +348,7 @@ namespace OpenUI5BridgeGenerator
                             }
                             if (prop.Value["events"] != null)
                             {
+                                parentEventArgs.Add(uiObject["name"].Value<string>(), prop.Value["events"].Value<JObject>());
                                 foreach (var evObj in prop.Value["events"].Value<JObject>().Properties())
                                 {
                                     specialEventBuilder.AppendLine("this." +
@@ -354,6 +368,7 @@ namespace OpenUI5BridgeGenerator
                                 JArray parentPropertiesArray = new JArray();
                                 JArray parentEventArray = new JArray();
                                 JArray parentAggs = new JArray();
+                                JObject parentEventArg = null;
                                 string defaultAgg = null;
                                 if (parentProperties.ContainsKey(curParent))
                                     parentPropertiesArray = parentProperties[curParent];
@@ -363,7 +378,9 @@ namespace OpenUI5BridgeGenerator
                                     parentAggs = parentAggregations[curParent];
                                 if (parentDefaultAggregation.ContainsKey(curParent))
                                     defaultAgg = parentDefaultAggregation[curParent];
-                                AddParentPropertiesAndEvents(objectName, curParent, parentPropertiesArray, parentEventArray, propertyBuilder, changeHandlerBuilder);
+                                if (parentEventArgs.ContainsKey(curParent))
+                                    parentEventArg = parentEventArgs[curParent];
+                                AddParentPropertiesAndEvents(objectName, curParent, parentPropertiesArray, parentEventArray, propertyBuilder, changeHandlerBuilder, specialEventBuilder, parentEventArg);
                                 AddAggregation(objectName, prop, uiObject, defaultAgg, newRoot, parentAggs, addChildBuilder, removeChildBuilder);
                                 if (parentRelations.ContainsKey(curParent))
                                     curParent = parentRelations[curParent];
