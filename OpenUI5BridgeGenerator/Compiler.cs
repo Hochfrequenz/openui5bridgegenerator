@@ -69,10 +69,8 @@ namespace OpenUI5BridgeGenerator
                         int insertFunction = 2;
                         if (prop.Value["useAddInsteadOfInsert"] != null && prop.Value["useAddInsteadOfInsert"].Value<bool>())
                             insertFunction = 3;
-                        addChildBuilder.AppendLine("if (elem.localName == '" + lowerAggName + "') { var _index = null; if (afterElement) _index = this." +
-                            "_" + objectName.ToLower() +
-                            "." + agg["methods"].Value<JArray>()[5].Value<string>() + "(afterElement); if (_index)this." + "_" + objectName.ToLower() +
-                            "." + agg["methods"].Value<JArray>()[insertFunction].Value<string>() + "(child, _index + 1); else this." +
+                        addChildBuilder.AppendLine("if (elem.localName == '" + lowerAggName + "') { var _index = afterElement?Math.floor(afterElement+1):null; if (_index)this." + "_" + objectName.ToLower() +
+                            "." + agg["methods"].Value<JArray>()[insertFunction].Value<string>() + "(child, _index); else this." +
                             "_" + objectName.ToLower() +
                             "." + agg["methods"].Value<JArray>()[3].Value<string>() + "(child, 0); " + (overrides != null ? overrides : "") + " return elem.localName; }");
                         overrides = null;
@@ -148,7 +146,7 @@ namespace OpenUI5BridgeGenerator
                     propertyBuilder.AppendLine("@bindable() " + ev["name"].Value<string>() + " = this.defaultFunc;");
 
                     changeHandlerBuilder.AppendLine(ev["name"].Value<string>() +
-                    "Changed(newValue){if(this." + "_" +
+                    "Changed(newValue){if(newValue!=null && newValue!=undefined && this." + "_" +
                     objectName.ToLower() +
                     "!==null){ this." +
                     "_" +
@@ -303,7 +301,7 @@ namespace OpenUI5BridgeGenerator
                                     else
                                         paramBuilder.AppendLine("params." + property["name"].Value<string>() + " = " + paramValue + ";");
                                     changeHandlerBuilder.AppendLine(property["name"].Value<string>() +
-                                        "Changed(newValue){if(this." + "_" +
+                                        "Changed(newValue){if(newValue!=null && newValue!=undefined && this." + "_" +
                                         objectName.ToLower() +
                                         "!==null){ this." +
                                         "_" +
@@ -336,7 +334,7 @@ namespace OpenUI5BridgeGenerator
                                     paramBuilder.AppendLine("params." + ev["name"].Value<string>() + " = " + paramValue + ";");
 
                                     changeHandlerBuilder.AppendLine(ev["name"].Value<string>() +
-                                    "Changed(newValue){if(this." + "_" +
+                                    "Changed(newValue){if(newValue!=null && newValue!=undefined && this." + "_" +
                                     objectName.ToLower() +
                                     "!==null){ this." +
                                     "_" +

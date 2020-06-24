@@ -2,7 +2,7 @@
   "profiles": {
     "OpenUI5BridgeGenerator": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\joscha\\Downloads\\openui5-sdk-1.52.9\\test-resources\""
+      "commandLineArgs": "\"C:\\Develop\\Tools\\openui5-sdk-1.73.1\\test-resources\""
     }
   }
 }

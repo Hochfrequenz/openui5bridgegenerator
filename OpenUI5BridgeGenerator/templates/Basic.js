@@ -11,6 +11,9 @@ export class <classname> <extendsparentClass>{
         _parent = null;
         _relation = null;
          @bindable ui5Id = null;
+         @bindable ui5Class = null;
+         @bindable ui5Tooltip = null;
+         @bindable prevId = null;
         <properties>
                 constructor(element) {
                     <supercontructor>                    
@@ -33,27 +36,26 @@ export class <classname> <extendsparentClass>{
             this.fillProperties(params);
          if (this.ui5Id)
           this.<classvar> = new <sapClass>(this.ui5Id, params);
-        else
+                                              else
           this.<classvar> = new <sapClass>(params);
+                                                  if(this.ui5Class)
+           this.<classvar>.addStyleClass(this.ui5Class);
+                                             if(this.ui5Tooltip)
+           this.<classvar>.setTooltip(this.ui5Tooltip);                                             
         <attachOverride>
         if ($(this.element).closest("[ui5-container]").length > 0) {
                                             this._parent = $(this.element).closest("[ui5-container]")[0].au.controller.viewModel;
                                         if (!this._parent.UIElement || (this._parent.UIElement.sId != this.<classvar>.sId)) {
         var prevSibling = null;
-        if (this.element.previousElementSibling && this.element.previousElementSibling.au)
-          prevSibling = this.element.previousElementSibling.au.controller.viewModel.UIElement;
-        this._relation = this._parent.addChild(this.<classvar>, this.element, prevSibling);
+       
+        this._relation = this._parent.addChild(this.<classvar>, this.element, this.prevId);
         this.attributeManager.addAttributes({"ui5-container": '' });
       }
       else {
                                                     this._parent = $(this.element.parentElement).closest("[ui5-container]")[0].au.controller.viewModel;
                                                 var prevSibling = null;
-        if (this.element.previousElementSibling && this.element.previousElementSibling.au) {
-                                                    prevSibling = this.element.previousElementSibling.au.controller.viewModel.UIElement;
-                                                this._relation = this._parent.addChild(this.<classvar>, this.element, prevSibling);
-        }
-        else
-          this._relation = this._parent.addChild(this.<classvar>, this.element);
+                                                       this._relation = this._parent.addChild(this.<classvar>, this.element, this.prevId);
+        
         this.attributeManager.addAttributes({"ui5-container": '' });
       }
     }
@@ -75,6 +77,7 @@ export class <classname> <extendsparentClass>{
         try{
           if ($(this.element).closest("[ui5-container]").length > 0) {
         if (this._parent && this._relation) {
+                                                                 if(this.<classvar>)
                                                                 this._parent.removeChildByRelation(this.<classvar>, this._relation);
                                                             }
                                                                                 }

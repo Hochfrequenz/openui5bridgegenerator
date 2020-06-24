@@ -32,8 +32,19 @@
     "Form": {},
     "FormContainer": {},
     "FormElement": {},
+    "PaneContainer": {},
+    "ResponsiveSplitter": {},
     "ResponsiveGridLayout": {},
-    "SimpleForm": {}
+    "SimpleForm": {},
+    "Splitter": {},
+    "SplitPane": {}
+  },
+  "sap.ui.table": {
+    "Column": { "overrideName": "gridTableColumn" },
+    "Row": { "overrideName": "gridTableRow" },
+    "Table": { "overrideName": "gridTable" },
+    "RowAction": { "overrideName": "gridTableRowAction" },
+    "RowSettings": { "overrideName": "gridTableRowSetting" }
   },
   "sap.f": {
     "DynamicPage": { "defaultAggregation": "content" },
@@ -108,7 +119,7 @@
     "ObjectNumber": {},
 
     "Page": {},
-
+    "Panel": {},
     "ResponsivePopover": { "defaultAggregation": "content" },
     "SearchField": {
       "events": {
@@ -141,6 +152,7 @@
     "SplitContainer": {},
     "StandardListItem": {},
     "StandardTile": {},
+    "SuggestionItem": {},
     "Switch": {},
     "TabContainer": { "defaultAggregation": "items" },
     "TabContainerItem": { "defaultAggregation": "content" },
@@ -152,6 +164,12 @@
       "defaultAggregation": "customData",
       "paramOverrides": {
         "text": "(this.text != null && this.text.length>0) ? this.text : this.element.getElementsByTagName(\"customData\")[0].innerText.trim();"
+      }
+    },
+    "TextArea": {
+      "events": {
+        "Change": "that.value = event.mParameters.value;",
+        "LiveChange": "if (getBooleanFromAttributeValue(that.valueLiveUpdate)) {that.value = event.mParameters.value;}"
       }
     },
     "TileContainer": {},
